@@ -1,6 +1,15 @@
 import { defineConfig, type Template, type TinaField } from 'tinacms';
 
-const branch = process.env.GITHUB_BRANCH ?? process.env.HEAD ?? 'main';
+const branch =
+	process.env.TINA_BRANCH ??
+	process.env.GITHUB_BRANCH ??
+	process.env.CF_BRANCH ??
+	process.env.CF_PAGES_BRANCH ??
+	process.env.GITHUB_REF_NAME ??
+	process.env.HEAD ??
+	'main';
+const clientId = process.env.TINA_CLIENT_ID;
+const token = process.env.TINA_TOKEN;
 
 const pageRoutes: Record<string, string> = {
 	start: '/',
@@ -277,6 +286,8 @@ const blockTemplates: Template[] = [
 
 export default defineConfig({
 	branch,
+	clientId,
+	token,
 	build: { outputFolder: 'admin', publicFolder: 'public' },
 	media: { tina: { mediaRoot: 'images/uploads', publicFolder: 'src/assets' } },
 	schema: {

@@ -8,13 +8,16 @@
   "scripts": {
     "dev": "tinacms dev -c \"astro dev\"",
     "build": "tinacms build --local --skip-cloud-checks -c \"astro build\"",
+    "build:production": "tinacms build -c \"astro build\"",
     "migrate:blocks": "node scripts/migrate-page-blocks.mjs",
     "preview": "astro preview",
+    "preview:worker": "wrangler dev",
+    "deploy": "wrangler deploy",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
-    "@astrojs/node": "^11.1.4",
+    "@astrojs/cloudflare": "^14.2.5",
     "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/vite": "^4.3.3",
     "@tinacms/astro": "^0.6.1",
@@ -30,6 +33,7 @@
   },
   "devDependencies": {
     "@tinacms/cli": "^2.6.1",
-    "tinacms": "^3.12.1"
+    "tinacms": "^3.12.1",
+    "wrangler": "^4.127.1"
   }
 }

@@ -6,7 +6,7 @@ const rasterAssetModules = import.meta.glob<ImageMetadata>(
 	{ import: 'default' }
 );
 const sourceAssetModules = import.meta.glob<string>(
-	'/src/assets/images/uploads/**/*.{gif,tiff,svg}',
+	'/src/assets/images/uploads/**/*.{gif,tif,tiff,svg}',
 	{ import: 'default', query: '?url' }
 );
 

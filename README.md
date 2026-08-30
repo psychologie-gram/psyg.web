@@ -67,11 +67,12 @@ Alle sichtbaren Texte und Beschriftungen werden ueber diese Dokumente geladen.
 Globale UI-Texte liegen unter `site.ui`; Seitenbilder liegen in den
 entsprechenden `page.blocks[]`-Vorlagen, zum Beispiel `hero.image` oder
 `services.cards[].image`. Alle in Tina bearbeitbaren Medien liegen im
-Medienordner `public/images/uploads` und werden in den JSON-Dateien mit einem
-Pfad wie `/images/uploads/datei.svg` referenziert. Sie koennen im Editor durch
-Uploads oder andere vorhandene Medien ersetzt werden. Nicht-redaktionelle
-Website-Dateien wie Favicon und Open-Graph-Grafik bleiben ausserhalb dieses
-Ordners.
+Medienordner `src/assets/images/uploads` und werden in den JSON-Dateien mit
+einem Pfad wie `/images/uploads/datei.svg` referenziert. TinaCloud schreibt
+neue Uploads in denselben Git-Ordner. Astro importiert diese Dateien beim Build
+und liefert sie als statische Workers-Assets aus; eine Laufzeit-Dateisystemroute
+ist nicht erforderlich. Nicht-redaktionelle Website-Dateien wie Favicon und
+Open-Graph-Grafik bleiben ausserhalb dieses Ordners.
 Der Textinhalt-Block verwendet ein Tina-Rich-Text-Feld. Dadurch koennen
 Formatierungen wie Fett, Kursiv, Hervorhebung und Links direkt im visuellen
 Editor gepflegt werden.
@@ -160,4 +161,111 @@ tina/
 
 ## Deployment
 
-Die aktuelle Tina-Konfiguration ist fuer lokale Bearbeitung ohne TinaCloud ausgelegt. Wenn spaeter ein gehostetes Editor-Setup noetig ist, muessen Tina-Cloud- oder Self-Hosted-Details gezielt ergaenzt werden.
+Die Produktionsarchitektur besteht aus einem statischen Astro-Build auf einem
+Cloudflare Worker und TinaCloud als verwaltetem CMS-Backend. Es gibt keinen
+Tina-Backend-Server, keine Datenbank, keinen Runtime-Dateispeicher und kein
+R2-Medienarchiv. `wrangler.jsonc` konfiguriert Workers Assets, die
+On-Demand-Route fuer Tina-Islands, 404-Verhalten und Observability.
+
+### Produktions-Build
+
+Der lokale Build bleibt fuer Entwicklung und CI ohne Cloud-Zugang verfuegbar:
+
+```sh
+npm run build
+```
+
+Ein manueller Produktions-Build verwendet dagegen:
+
+```sh
+npm ci
+npm run build:production
+npm run deploy
+```
+
+`build:production` fuehrt `tinacms build` ohne `--local` oder
+`--skip-cloud-checks` aus und startet danach `astro build`. Dadurch wird der
+generierte Admin zusammen mit der Website gebaut und der Astro-Server nur fuer
+`/tina-island/*` in den Worker aufgenommen. Fuer einen lokalen Worker-Test
+zuerst `npm run build` und danach `npm run preview:worker` ausfuehren.
+`npm run preview` verwendet mit dem Cloudflare-Adapter ebenfalls die
+Workerd/Wrangler-Vorschau und ist kein Node-Produktionsserver.
+
+### TinaCloud einrichten
+
+1. Das Repository in [TinaCloud](https://app.tina.io/) als Projekt anlegen,
+   GitHub verbinden und den Produktionsbranch festlegen. `tina/tina-lock.json`
+   muss committed und auf diesem Branch vorhanden sein.
+2. Die TinaCloud-Konfiguration beziehungsweise den Backend-Init ausfuehren
+   und die Projekt-ID sowie den Read-only-Token aus dem TinaCloud-Projekt
+   verwenden.
+3. Die folgenden Werte als **GitHub-Environment-Variablen beziehungsweise
+   -Secrets** im Environment `production` hinterlegen, nicht in `src/`,
+   `public/`, `wrangler.jsonc` oder generierten Output schreiben:
+
+   | Variable | Zweck | Geheimnis |
+   | --- | --- | --- |
+   | `TINA_CLIENT_ID` | TinaCloud-Projekt-ID und Admin-Konfiguration | Nein |
+   | `TINA_TOKEN` | Read-only-Token fuer Build- und Preview-Abfragen | Ja |
+   | `TINA_BRANCH` | Branch, aus dem der Deployment-Build liest, z. B. `main` | Nein |
+
+   `TINA_BRANCH` hat Vorrang vor automatisch erkannten CI-Branchvariablen.
+   Ohne diese Variable verwendet die Konfiguration `GITHUB_BRANCH`,
+   `CF_BRANCH`, `CF_PAGES_BRANCH`, `GITHUB_REF_NAME`, `HEAD` oder zuletzt
+   `main`. So bleibt die Branch-Auswahl deployabhängig und es wird kein
+   Preview-Branch im Code festgeschrieben.
+4. Als erlaubte Site-/Preview-Origins mindestens
+   `https://www.psychologie-gram.at` und die tatsaechlich verwendete
+   Cloudflare-Vorschau-URL in TinaCloud eintragen. `/admin/` bleibt auf
+   derselben Website-Origin; `PUBLIC_TINA_ADMIN_ORIGIN` ist nur bei einer
+   zusaetzlichen Cross-Origin-Vorschau erforderlich.
+
+TinaCloud uebernimmt Authentifizierung, Berechtigungen, GraphQL, Indexierung,
+GitHub-Commits und Medien-Uploads. Die vorhandenen `TinaIsland`-Wrapper,
+Feldmarker und die Route `src/pages/tina-island/[name].ts` bleiben deshalb
+Bestandteil der Anwendung.
+
+### GitHub Actions, Cloudflare und Domains
+
+`.github/workflows/deploy.yml` baut und deployt den Worker. Der Workflow laeuft
+bei jedem Push auf `main` und kann ueber `workflow_dispatch` manuell gestartet
+werden. Dadurch loest ein TinaCloud-Commit auf dem Produktionsbranch
+automatisch eine neue Veroeffentlichung aus. Cloudflare Workers Builds sollte
+fuer diesen Worker nicht parallel aktiviert werden, damit nicht zwei
+Deployment-Pipelines dieselbe Version veroeffentlichen.
+
+Im GitHub-Environment `production` muessen zusaetzlich diese Cloudflare-Werte
+hinterlegt werden:
+
+| Variable/Secret | Zweck | Geheimnis |
+| --- | --- | --- |
+| `CLOUDFLARE_API_TOKEN` | Wrangler-Authentifizierung fuer den Worker-Deploy | Ja |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare-Account des Workers | Ja |
+
+Der API-Token sollte auf den benoetigten Cloudflare-Account und die
+Workers-Scripts-Berechtigung zum Bearbeiten begrenzt werden. Der Workflow
+verwendet Node.js `22.12.0`, `npm ci`, `npm run build:production` und danach
+`npm run deploy`. Fehlgeschlagene Tina-Generierung, fehlende Variablen,
+ungueltige Inhalte oder Deploy-Fehler brechen den Lauf ab und sind in der
+GitHub-Actions-Historie sichtbar. Jede erfolgreiche Ausfuehrung erzeugt eine
+neue Worker-Version, die im Cloudflare-Dashboard zurueckgerollt werden kann.
+
+Ein TinaCloud-Speichern ist daher nicht sofort oeffentlich: TinaCloud committet
+zuerst nach GitHub, danach veroeffentlicht der ausgelöste GitHub-Actions-Lauf
+die neue Worker-Version. Ein GitHub-Revert durchlaeuft denselben Weg und
+aktualisiert anschliessend auch die TinaCloud-Branchdaten.
+
+Den Worker im Dashboard mit `www.psychologie-gram.at` und dem bevorzugten
+kanonischen Host verbinden. DNS, Custom Domain, TLS und Redirect vom jeweils
+anderen Host werden dort konfiguriert; die kanonische URL bleibt
+`https://www.psychologie-gram.at`. Cloudflare Assets bedienen HTML, Admin,
+JavaScript, CSS und alle importierten Medien. Die
+`/tina-island/*`-Anfragen werden dagegen im Worker ausgefuehrt und greifen fuer
+die Live-Vorschau auf TinaCloud zu.
+
+Die Kosten und Limits richten sich nach den gewaehlten TinaCloud- und
+Cloudflare-Tarifen. Besonders GitHub-basierte Medien vergroessern Repository
+und Build-Zeit; R2 oder ein eigenes Backend wuerden eine zweite Quelle der
+Wahrheit und zusaetzliche Betriebs- und Kostenflaechen einfuehren und sind
+deshalb nicht Teil dieser Konfiguration. Das Kontaktformular behaelt
+unveraendert sein bestehendes `mailto:`-Verhalten.

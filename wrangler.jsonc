@@ -1,0 +1,17 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "psychologie-gram",
+	"main": "@astrojs/cloudflare/entrypoints/server",
+	"compatibility_date": "2026-08-30",
+	"workers_dev": true,
+	"preview_urls": true,
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS",
+		"not_found_handling": "404-page",
+		"run_worker_first": ["/tina-island/*"]
+	},
+	"observability": {
+		"enabled": true
+	}
+}
