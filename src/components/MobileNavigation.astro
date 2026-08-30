@@ -1,0 +1,83 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+
+import { resolveCmsHref } from '../lib/links';
+import type { PageData, SiteSettings } from '../lib/site-data';
+import type { TinaPageListDocument, TinaSiteDocument } from '../lib/tina/data';
+import { isCurrentPath } from '../lib/navigation';
+import Button from './ui/Button.astro';
+import NavLink from './ui/NavLink.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+	pages: PageData[];
+	currentPath: string;
+	site: SiteSettings;
+	siteSource: TinaSiteDocument;
+	pageSources: TinaPageListDocument[];
+}
+
+const { pages, currentPath, site, siteSource, pageSources } = Astro.props;
+const emailHref = resolveCmsHref(`mailto:${site.email}`);
+const phoneHref = resolveCmsHref(`tel:${site.phone}`);
+const headerCtaHref = resolveCmsHref(site.ui.headerCta.href) ?? '#';
+---
+
+<div class="flex items-center gap-2 xl:hidden">
+	<ThemeToggle />
+
+	<details class="mobile-nav relative">
+		<summary class="mobile-nav-toggle">
+			<span data-tina-field={tinaField(siteSource.ui, 'menuLabel')}>{site.ui.menuLabel}</span>
+			<span aria-hidden="true" class="mobile-nav-indicator text-base leading-none">+</span>
+		</summary>
+
+		<div class="mobile-sheet absolute right-0 top-full mt-3 w-[min(24rem,calc(100vw-2rem))] p-4 sm:w-[22rem]">
+			<nav aria-label="Mobile Hauptnavigation">
+				<ul class="space-y-1">
+					{
+						pages.map((page) => {
+							const active = isCurrentPath(currentPath, page.route);
+							const sourcePage = pageSources.find((source) => source.route === page.route);
+							const href = resolveCmsHref(page.route) ?? '#';
+
+							return (
+								<li>
+									<NavLink href={href} active={active} mobile tinaField={tinaField(sourcePage, 'route')}>
+										<span data-tina-field={tinaField(sourcePage, 'navTitle')}>{page.navTitle}</span>
+									</NavLink>
+								</li>
+							);
+						})
+					}
+				</ul>
+			</nav>
+
+			<div class="mt-4 space-y-2 border-t border-[var(--border-color)] pt-4 text-sm leading-7">
+				<p>
+					{emailHref ? (
+						<a href={emailHref} class="text-[var(--muted)] hover:text-[var(--accent-deep)]" data-tina-field={tinaField(siteSource, 'email')}>
+							{site.email}
+						</a>
+					) : (
+						<span data-tina-field={tinaField(siteSource, 'email')}>{site.email}</span>
+					)}
+				</p>
+				<p>
+					{phoneHref ? (
+						<a href={phoneHref} class="text-[var(--muted)] hover:text-[var(--accent-deep)]" data-tina-field={tinaField(siteSource, 'phone')}>
+							<span data-tina-field={tinaField(siteSource, 'phoneDisplay')}>{site.phoneDisplay}</span>
+						</a>
+					) : (
+						<span data-tina-field={tinaField(siteSource, 'phoneDisplay')}>{site.phoneDisplay}</span>
+					)}
+				</p>
+				<div class="mt-2">
+					<Button href={headerCtaHref} fullWidth tinaField={tinaField(siteSource.ui?.headerCta, 'href')}>
+						<span data-tina-field={tinaField(siteSource.ui?.headerCta, 'label')}>{site.ui.headerCta.label}</span>
+					</Button>
+				</div>
+			</div>
+		</div>
+	</details>
+</div>

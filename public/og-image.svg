@@ -1,0 +1,16 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="40" fill="#F6F0E6"/>
+  <rect x="44" y="44" width="1112" height="542" rx="34" fill="#FBF7F0"/>
+  <path d="M784 96C867.827 96 936 164.173 936 248V534H784V96Z" fill="#DDE3D3"/>
+  <rect x="738" y="120" width="318" height="390" rx="28" fill="#E8DFC9"/>
+  <rect x="762" y="144" width="270" height="342" rx="22" fill="#F2EBE0"/>
+  <circle cx="896" cy="248" r="86" fill="#657158"/>
+  <circle cx="896" cy="248" r="70" fill="#FBF7F0"/>
+  <path d="M238 147H498" stroke="#657158" stroke-width="2"/>
+  <text x="132" y="160" fill="#4E5944" font-family="Georgia, 'Times New Roman', serif" font-size="26" letter-spacing="8">PSYCHOLOGISCHE PRAXIS</text>
+  <text x="132" y="286" fill="#2D261F" font-family="Georgia, 'Times New Roman', serif" font-size="94" font-weight="700">Psychologie</text>
+  <text x="132" y="376" fill="#2D261F" font-family="Georgia, 'Times New Roman', serif" font-size="94" font-weight="700">Gram</text>
+  <text x="132" y="450" fill="#65594D" font-family="Arial, Helvetica, sans-serif" font-size="28">Klinisch-psychologische Therapie und Beratung</text>
+  <text x="132" y="492" fill="#65594D" font-family="Arial, Helvetica, sans-serif" font-size="28">Wissenschaftlich fundiert. Wertschätzend. Klar.</text>
+  <text x="132" y="548" fill="#2D261F" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">www.psychologie-gram.at</text>
+</svg>

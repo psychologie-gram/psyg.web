@@ -1,0 +1,69 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+
+import type { TimelineBlock } from '../lib/site-data';
+import { indexedRecordList, indexedStringList, type TinaPageBlockDocument } from '../lib/tina/data';
+import Container from './ui/Container.astro';
+import Section from './ui/Section.astro';
+
+interface Props {
+	block: TimelineBlock;
+	source?: TinaPageBlockDocument | null;
+}
+
+const { block, source } = Astro.props;
+const entrySources = indexedRecordList(source?.entries);
+---
+
+<Section tight>
+	<Container>
+		{block.title && <h2 class="section-title mb-6" data-tina-field={tinaField(source, 'title')}>{block.title}</h2>}
+		<ul class="timeline timeline-vertical w-full" data-tina-field={tinaField(source)}>
+			{block.entries.map((entry, index) => {
+				const sourceEntry = entrySources[index]?.value;
+				const detailSources = indexedStringList(sourceEntry?.details);
+				const entryOnLeft = index % 2 === 0;
+				return (
+					<li>
+						{index > 0 && <hr class="bg-[var(--border-color)]" aria-hidden="true" />}
+						<article
+							class:list={[
+								'timeline-box w-full min-w-0 bg-[var(--bg)]',
+								entryOnLeft ? 'timeline-start' : 'timeline-end'
+							]}
+							data-tina-field={tinaField(sourceEntry)}
+						>
+							<p class="text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-primary" data-tina-field={tinaField(sourceEntry, 'period')}>
+								{entry.period}
+							</p>
+							<h3 class="mt-2 text-[1.25rem] leading-8 text-[var(--text)] sm:text-[1.4rem]" data-tina-field={tinaField(sourceEntry, 'title')}>
+								{entry.title}
+							</h3>
+							{entry.organization && (
+								<p class="mt-2 text-base leading-7 text-[var(--muted)]" data-tina-field={tinaField(sourceEntry, 'organization')}>
+									{entry.organization}
+								</p>
+							)}
+							{entry.details.length > 0 && (
+								<ul class="mt-4 space-y-3">
+									{entry.details.map((detail, detailIndex) => (
+										<li class="flex gap-3 text-sm leading-7 text-[var(--muted)] sm:text-base">
+											<span aria-hidden="true" class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span>
+											<span class="[overflow-wrap:anywhere]" data-tina-field={tinaField(sourceEntry, 'details', detailSources[detailIndex]?.index ?? detailIndex)}>
+												{detail}
+											</span>
+										</li>
+									))}
+								</ul>
+							)}
+						</article>
+						<div class="timeline-middle" aria-hidden="true">
+							<span class="block h-3 w-3 rounded-full bg-[var(--accent)] ring-4 ring-[var(--bg)]"></span>
+						</div>
+						{index < block.entries.length - 1 && <hr class="bg-[var(--border-color)]" aria-hidden="true" />}
+					</li>
+				);
+			})}
+		</ul>
+	</Container>
+</Section>

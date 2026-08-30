@@ -1,0 +1,66 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+
+import { resolveCmsHref } from '../lib/links';
+import type { PageData, SiteSettings } from '../lib/site-data';
+import type { TinaPageListDocument, TinaSiteDocument } from '../lib/tina/data';
+import Container from './ui/Container.astro';
+
+interface Props {
+	pages: PageData[];
+	site: SiteSettings;
+	siteSource: TinaSiteDocument;
+	pageSources: TinaPageListDocument[];
+}
+
+const { pages, site, siteSource, pageSources } = Astro.props;
+const legalPage = pages.find((page) => /impressum|datenschutz/i.test(`${page.route} ${page.title} ${page.navTitle}`));
+const legalSource = pageSources.find((page) => page.route === legalPage?.route);
+const emailHref = resolveCmsHref(`mailto:${site.email}`);
+const phoneHref = resolveCmsHref(`tel:${site.phone}`);
+---
+
+<footer class="mt-10 bg-[var(--bg)]">
+	<Container class="py-4">
+		<div class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm leading-6 text-[var(--muted)] [overflow-wrap:anywhere] sm:flex sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-4 sm:gap-y-2 lg:flex-nowrap lg:justify-between">
+			<p class="font-medium text-[var(--text)]">
+				&copy; <span data-tina-field={tinaField(siteSource.ui, 'footerCopyright')}>{site.ui.footerCopyright}</span>{' '}
+				<span data-tina-field={tinaField(siteSource, 'owner')}>{site.owner}</span>
+			</p>
+
+			<p>
+				{emailHref ? (
+					<a href={emailHref} class="hover:text-[var(--accent-deep)]" data-tina-field={tinaField(siteSource, 'email')}>
+						<span data-tina-field={tinaField(siteSource, 'email')}>{site.email}</span>
+					</a>
+				) : (
+					<span data-tina-field={tinaField(siteSource, 'email')}>{site.email}</span>
+				)}
+			</p>
+
+			<p>
+				{phoneHref ? (
+					<a href={phoneHref} class="hover:text-[var(--accent-deep)]" data-tina-field={tinaField(siteSource, 'phone')}>
+						<span data-tina-field={tinaField(siteSource, 'phoneDisplay')}>{site.phoneDisplay}</span>
+					</a>
+				) : (
+					<span data-tina-field={tinaField(siteSource, 'phoneDisplay')}>{site.phoneDisplay}</span>
+				)}
+			</p>
+
+			{
+				legalPage && (
+					<p>
+						<a
+							href={resolveCmsHref(legalPage.route) ?? '#'}
+							class="hover:text-[var(--accent-deep)]"
+							data-tina-field={tinaField(legalSource, 'route')}
+						>
+							<span data-tina-field={tinaField(legalSource, 'title')}>{legalPage.title}</span>
+						</a>
+					</p>
+				)
+			}
+		</div>
+	</Container>
+</footer>

@@ -1,0 +1,24 @@
+---
+interface Props {
+	href: string;
+	active?: boolean;
+	mobile?: boolean;
+	tinaField?: string;
+}
+
+const { href, active = false, mobile = false, tinaField: field } = Astro.props;
+---
+
+<a
+	href={href}
+	aria-current={active ? 'page' : undefined}
+	data-tina-field={field}
+	class:list={[
+		'link link-hover rounded-box px-3 py-2 no-underline',
+		mobile && 'block text-base leading-6',
+		mobile ? 'text-[var(--text)]' : 'text-[var(--muted)]',
+		active && 'bg-[var(--bg-soft)] text-[var(--accent-deep)]'
+	]}
+>
+	<slot />
+</a>

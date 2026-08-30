@@ -1,0 +1,43 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+
+import type { CalloutBlock } from '../lib/site-data';
+import { resolveCmsHref } from '../lib/links';
+import { indexedRecordList, type TinaPageBlockDocument } from '../lib/tina/data';
+import Button from './ui/Button.astro';
+import Card from './ui/Card.astro';
+import Container from './ui/Container.astro';
+import Section from './ui/Section.astro';
+
+interface Props {
+	block: CalloutBlock;
+	source?: TinaPageBlockDocument | null;
+}
+
+const { block, source } = Astro.props;
+const noticeSources = indexedRecordList(source?.notices);
+---
+
+<Section tight>
+	<Container>
+		{block.title && <h2 class="section-title mb-6" data-tina-field={tinaField(source, 'title')}>{block.title}</h2>}
+		<div class:list={['grid gap-4', block.notices.length > 1 && 'md:grid-cols-2']}>
+			{block.notices.map((callout, index) => {
+				const sourceCallout = noticeSources[index]?.value;
+				const href = resolveCmsHref(callout.href);
+				const isExternal = href ? /^https?:/i.test(href) : false;
+				return (
+					<Card tone="accent" class="p-5 sm:p-6" tinaField={tinaField(sourceCallout)}>
+						{callout.title && <h3 class="text-xl leading-8 text-[var(--text)]" data-tina-field={tinaField(sourceCallout, 'title')}>{callout.title}</h3>}
+						<p class:list={['text-base leading-8 text-[var(--muted)]', callout.title && 'mt-2']} data-tina-field={tinaField(sourceCallout, 'text')}>{callout.text}</p>
+						{href && callout.hrefLabel && (
+							<Button href={href} variant="ghost" size="small" target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noreferrer' : undefined} tinaField={tinaField(sourceCallout, 'href')}>
+								<span data-tina-field={tinaField(sourceCallout, 'hrefLabel')}>{callout.hrefLabel}</span><span aria-hidden="true">&rarr;</span>
+							</Button>
+						)}
+					</Card>
+				);
+			})}
+		</div>
+	</Container>
+</Section>

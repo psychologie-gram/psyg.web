@@ -1,0 +1,127 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+
+import type { HeroContent, SiteSettings } from '../lib/site-data';
+import { asTinaRecord, type TinaPageBlockDocument } from '../lib/tina/data';
+import { resolveCmsHref } from '../lib/links';
+
+import PortraitAside from './PortraitAside.astro';
+import Button from './ui/Button.astro';
+import Container from './ui/Container.astro';
+import Section from './ui/Section.astro';
+
+interface Props {
+	hero: HeroContent;
+	site: SiteSettings;
+	source?: TinaPageBlockDocument | null;
+}
+
+const { hero, site, source } = Astro.props;
+const showPortrait = hero.variant !== 'standard';
+const tallPortrait = hero.variant === 'portrait-tall';
+const hasIntro = hero.intro.trim().length > 0;
+const hasEyebrow = hero.eyebrow?.trim().length;
+const hasSubtitle = hero.subtitle?.trim().length;
+const hasInlineBody = Astro.slots.has('inline-body');
+const hasInlineCallout = Astro.slots.has('inline-callout');
+const hasCtas = Boolean(hero.primaryCta || hero.secondaryCta);
+const isCompactHero = !showPortrait && !hasEyebrow && !hasIntro && !hasCtas;
+const sectionClass = `${isCompactHero ? 'pt-6 sm:pt-8' : 'pt-8 sm:pt-12'}${hasInlineCallout ? ' pb-2 sm:pb-3' : ''}`;
+const primaryCtaHref = resolveCmsHref(hero.primaryCta?.href);
+const secondaryCtaHref = resolveCmsHref(hero.secondaryCta?.href);
+const primaryCtaSource = asTinaRecord(source?.primaryCta);
+const secondaryCtaSource = asTinaRecord(source?.secondaryCta);
+---
+
+<Section tight={isCompactHero} class={sectionClass}>
+	<Container>
+		{
+			showPortrait ? (
+				<div
+					class:list={[
+						'grid items-center gap-6',
+						tallPortrait ? 'lg:grid-cols-[minmax(0,1.08fr)_28rem] lg:items-start lg:gap-4' : 'lg:grid-cols-2 lg:gap-12'
+					]}
+				>
+					<div class="max-w-2xl">
+						{hasEyebrow && <p class="overline hero-name" data-tina-field={tinaField(source, 'eyebrow')}>{hero.eyebrow}</p>}
+						<h1 class:list={[tallPortrait ? 'page-title' : 'display-title', hasEyebrow ? 'mt-4' : 'mt-0', 'text-balance']}>
+							<span data-tina-field={tinaField(source, 'title')}>{hero.title}</span>
+						</h1>
+						{hasSubtitle && (
+							<p class="hero-subtitle mt-3" data-tina-field={tinaField(source, 'subtitle')}>
+								{hero.subtitle}
+							</p>
+						)}
+						{hasIntro && (
+							<p class="editorial-intro mt-5" data-tina-field={tinaField(source, 'intro')}>
+								{hero.intro}
+							</p>
+						)}
+						{hasInlineBody && <slot name="inline-body" />}
+
+						{hasCtas && (primaryCtaHref || secondaryCtaHref) && (
+							<div class="mt-7 flex flex-wrap gap-3">
+								{hero.primaryCta && primaryCtaHref && (
+									<Button href={primaryCtaHref} tinaField={tinaField(primaryCtaSource, 'href')}>
+										<span data-tina-field={tinaField(primaryCtaSource, 'label')}>{hero.primaryCta.label}</span>
+									</Button>
+								)}
+								{hero.secondaryCta && secondaryCtaHref && (
+									<Button href={secondaryCtaHref} variant="secondary" tinaField={tinaField(secondaryCtaSource, 'href')}>
+										<span data-tina-field={tinaField(secondaryCtaSource, 'label')}>{hero.secondaryCta.label}</span>
+									</Button>
+								)}
+							</div>
+						)}
+					</div>
+
+					<PortraitAside
+						site={site}
+						source={source}
+						align={tallPortrait ? 'start' : 'end'}
+						src={hero.image}
+						width={tallPortrait ? 446 : 550}
+						height={tallPortrait ? 1246 : 644}
+						presentation={tallPortrait ? 'natural' : 'framed'}
+						borderless
+						imageClass={tallPortrait ? 'mx-auto h-auto max-h-[42rem] w-auto max-w-full object-contain' : 'aspect-[5/6] w-full object-cover object-[center_18%]'}
+					/>
+				</div>
+			) : (
+				<div class="max-w-3xl">
+					{hasEyebrow && <p class="overline hero-name" data-tina-field={tinaField(source, 'eyebrow')}>{hero.eyebrow}</p>}
+					<h1 class:list={['page-title text-balance', hasEyebrow ? 'mt-4' : 'mt-0']}>
+						<span data-tina-field={tinaField(source, 'title')}>{hero.title}</span>
+					</h1>
+					{hasSubtitle && (
+						<p class="hero-subtitle mt-3" data-tina-field={tinaField(source, 'subtitle')}>
+							{hero.subtitle}
+						</p>
+					)}
+					{hasIntro && (
+						<p class="editorial-intro mt-5" data-tina-field={tinaField(source, 'intro')}>
+							{hero.intro}
+						</p>
+					)}
+
+					{hasCtas && (primaryCtaHref || secondaryCtaHref) && (
+						<div class="mt-7 flex flex-wrap gap-3">
+							{hero.primaryCta && primaryCtaHref && (
+								<Button href={primaryCtaHref} tinaField={tinaField(primaryCtaSource, 'href')}>
+									<span data-tina-field={tinaField(primaryCtaSource, 'label')}>{hero.primaryCta.label}</span>
+								</Button>
+							)}
+							{hero.secondaryCta && secondaryCtaHref && (
+								<Button href={secondaryCtaHref} variant="secondary" tinaField={tinaField(secondaryCtaSource, 'href')}>
+									<span data-tina-field={tinaField(secondaryCtaSource, 'label')}>{hero.secondaryCta.label}</span>
+								</Button>
+							)}
+						</div>
+					)}
+				</div>
+			)
+		}
+		<slot name="inline-callout" />
+	</Container>
+</Section>

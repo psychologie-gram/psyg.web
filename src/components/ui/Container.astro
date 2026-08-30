@@ -1,0 +1,12 @@
+---
+interface Props {
+	width?: 'narrow' | 'wide';
+	class?: string;
+}
+
+const { width = 'wide', class: additionalClass } = Astro.props;
+---
+
+<div class:list={['site-shell', width === 'narrow' && 'max-w-3xl', additionalClass]}>
+	<slot />
+</div>

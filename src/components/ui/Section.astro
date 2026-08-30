@@ -1,0 +1,12 @@
+---
+interface Props {
+	tight?: boolean;
+	class?: string;
+}
+
+const { tight = false, class: additionalClass } = Astro.props;
+---
+
+<section class:list={[tight ? 'section-space-tight' : 'section-space', additionalClass]}>
+	<slot />
+</section>

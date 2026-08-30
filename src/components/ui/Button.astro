@@ -1,0 +1,49 @@
+---
+interface Props {
+	href?: string;
+	variant?: 'primary' | 'secondary' | 'ghost' | 'link';
+	size?: 'default' | 'small';
+	fullWidth?: boolean;
+	type?: 'button' | 'submit' | 'reset';
+	disabled?: boolean;
+	target?: '_blank' | '_self';
+	rel?: string;
+	tinaField?: string;
+	class?: string;
+}
+
+const {
+	href,
+	variant = 'primary',
+	size = 'default',
+	fullWidth = false,
+	type = 'button',
+	disabled = false,
+	target,
+	rel,
+	tinaField: field,
+	class: additionalClass
+} = Astro.props;
+const isLink = variant === 'link';
+const classes = [
+	isLink ? 'link link-hover' : 'btn',
+	!isLink && variant === 'primary' && 'btn-primary',
+	!isLink && variant === 'secondary' && 'btn-outline',
+	!isLink && variant === 'ghost' && 'btn-ghost',
+	!isLink && size === 'small' && 'btn-sm',
+	fullWidth && 'w-full',
+	additionalClass
+];
+---
+
+{
+	href ? (
+		<a href={href} class:list={classes} target={target} rel={rel} data-tina-field={field}>
+			<slot />
+		</a>
+	) : (
+		<button type={type} class:list={classes} disabled={disabled} data-tina-field={field}>
+			<slot />
+		</button>
+	)
+}

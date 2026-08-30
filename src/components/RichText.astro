@@ -1,0 +1,24 @@
+---
+import TinaMarkdown from '@tinacms/astro/TinaMarkdown.astro';
+import type { CustomComponentsMap, TinaRichTextContent } from '@tinacms/astro/types';
+
+import RichTextImage from './RichTextImage.astro';
+import RichTextLink from './RichTextLink.astro';
+
+interface Props {
+	content: TinaRichTextContent;
+	class?: string;
+	tinaField?: string;
+	allowTelephone?: boolean;
+}
+
+const { content, class: className = 'prose-flow', tinaField: field, allowTelephone = false } = Astro.props;
+const components: CustomComponentsMap = {
+	img: RichTextImage,
+	...(allowTelephone ? { a: RichTextLink } : {})
+};
+---
+
+<div class={className} data-tina-field={field}>
+	<TinaMarkdown content={content} components={components} />
+</div>

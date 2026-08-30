@@ -1,0 +1,77 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+
+import type { ServicesContent } from '../lib/site-data';
+import { resolveCmsHref } from '../lib/links';
+import { resolveMediaPath } from '../lib/media';
+import { indexedRecordList, indexedStringList, type TinaPageBlockDocument } from '../lib/tina/data';
+import Card from './ui/Card.astro';
+import Container from './ui/Container.astro';
+import Button from './ui/Button.astro';
+import OptimizedImage from './OptimizedImage.astro';
+import Section from './ui/Section.astro';
+
+interface Props {
+	block: ServicesContent;
+	source?: TinaPageBlockDocument | null;
+}
+
+const { block, source } = Astro.props;
+const compact = block.variant === 'compact';
+const cardSources = indexedRecordList(source?.cards);
+---
+
+<Section tight>
+	<Container>
+		{block.title && <h2 class="section-title mb-6" data-tina-field={tinaField(source, 'title')}>{block.title}</h2>}
+		<div class:list={[compact ? 'grid gap-3 sm:grid-cols-2 xl:grid-cols-3' : 'grid gap-4 md:grid-cols-2 lg:grid-cols-3']}>
+			{block.cards.map((card, index) => {
+				const sourceCard = cardSources[index]?.value;
+				const itemSources = indexedStringList(sourceCard?.items);
+				const href = resolveCmsHref(card.href);
+				const isExternal = href ? /^https?:/i.test(href) : false;
+				const imageSrc = resolveMediaPath(card.image);
+				return (
+					<Card tone="default" class="flex h-full flex-col overflow-hidden p-0" tinaField={tinaField(sourceCard)}>
+						{imageSrc && (
+							<figure class="flex h-36 w-full items-center justify-center border-b border-[var(--border-color)] bg-[var(--bg-soft)] px-6 py-4 sm:h-44 sm:px-8" data-tina-field={tinaField(sourceCard, 'image')}>
+								<OptimizedImage
+									src={imageSrc}
+									alt={card.imageAlt}
+									width={242}
+									height={242}
+									widths={[160, 242]}
+									sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
+									loading="lazy"
+									decoding="async"
+									fit="contain"
+									class="h-full w-full object-contain"
+									tinaField={tinaField(sourceCard, 'imageAlt')}
+								/>
+							</figure>
+						)}
+						<div class="card-body flex flex-1 flex-col p-4 sm:p-5">
+							<h3 class="text-[1.2rem] leading-7 text-[var(--text)] sm:text-[1.3rem]" data-tina-field={tinaField(sourceCard, 'title')}>{card.title}</h3>
+							{card.description && <p class="mt-2 text-[0.95rem] leading-6 text-[var(--muted)] [overflow-wrap:anywhere]" data-tina-field={tinaField(sourceCard, 'description')}>{card.description}</p>}
+							{card.items.length > 0 && (
+								<ul class="mt-4 space-y-2.5 border-t border-[var(--border-color)] pt-3">
+									{card.items.map((item, itemIndex) => (
+										<li class="flex gap-3 text-sm leading-6 text-[var(--muted)]">
+											<span aria-hidden="true" class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span>
+											<span class="[overflow-wrap:anywhere]" data-tina-field={tinaField(sourceCard, 'items', itemSources[itemIndex]?.index ?? itemIndex)}>{item}</span>
+										</li>
+									))}
+								</ul>
+							)}
+							{href && card.hrefLabel && (
+								<Button href={href} variant="link" class="mt-auto inline-flex items-center gap-2 pt-5 font-semibold text-[var(--accent-deep)]" target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noreferrer' : undefined} tinaField={tinaField(sourceCard, 'href')}>
+									<span data-tina-field={tinaField(sourceCard, 'hrefLabel')}>{card.hrefLabel}</span><span aria-hidden="true">&rarr;</span>
+								</Button>
+							)}
+						</div>
+					</Card>
+				);
+			})}
+		</div>
+	</Container>
+</Section>

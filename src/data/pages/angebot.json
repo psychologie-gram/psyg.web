@@ -1,0 +1,67 @@
+{
+  "order": 3,
+  "route": "/angebot",
+  "title": "Angebot",
+  "navTitle": "Angebot",
+  "description": "Psychologische Therapie, Beratung, Supervision und Fachvorträge – abgestimmt auf Ihre aktuelle Lebenssituation und Ihre individuellen Bedürfnisse.",
+  "blocks": [
+    {
+      "_template": "hero",
+      "visible": true,
+      "variant": "standard",
+      "title": "Mein Angebot",
+      "intro": ""
+    },
+    {
+      "_template": "services",
+      "visible": true,
+      "variant": "grid",
+      "cards": [
+        {
+          "title": "Psychologische Therapie",
+          "image": "/images/uploads/angebot-psychologische-therapie.svg",
+          "imageAlt": "Illustration eines Wegweisers als Symbol für verschiedene Wege",
+          "description": "professionelle Unterstützung bei der Bewältigung psychischer, sozialer und körperlicher Schwierigkeiten"
+        },
+        {
+          "title": "Beratung",
+          "image": "/images/uploads/angebot-beratung.svg",
+          "imageAlt": "Illustration eines Frage-Antwort-Dialogs",
+          "description": "Entscheidungs- & Orientierungshilfen, Unterstützung bei konkreten Problemen, fachliche Infos, konkrete Hilfestellungen im Einzel-, Paar- oder Gruppensetting",
+          "items": [
+            "Eltern-/Erziehungsberatung",
+            "Beratung zum Umgang mit neu diagnostizierten psychischen/körperlichen Erkrankungen",
+            "Beratung zum sog. \"Nachteilsausgleich\" für Schule & Studium"
+          ]
+        },
+        {
+          "title": "Supervision",
+          "image": "/images/uploads/angebot-supervision.svg",
+          "imageAlt": "Illustration eines Lösungswegs mit Denkblase",
+          "description": "personenbezogene berufliche Beratung für Kolleg:innen aus dem psychosozialen & medizinischen Bereich",
+          "items": [
+            "berufliche Handlungen effizient, zielgerichtet & erfolgreich gestalten",
+            "Reflexion spezifischer beruflicher Situationen",
+            "Unterstützung bei heraus-fordernden Situationen & Konflikten",
+            "Begleitung & Initiierung von Veränderungen",
+            "Burnout- & Mobbingprävention"
+          ]
+        },
+        {
+          "title": "Vortragstätigkeiten",
+          "image": "/images/uploads/angebot-vortragstaetigkeiten.svg",
+          "imageAlt": "Illustration einer Person bei einem öffentlichen Vortrag",
+          "description": "Auf Anfrage biete ich gerne Fachvorträge zu meinen Schwerpunktthemen an."
+        },
+        {
+          "title": "Klinisch-psychologische Diagnostik",
+          "image": "/images/uploads/angebot-diagnostik.svg",
+          "imageAlt": "Illustration einer Person auf der Suche nach Antworten",
+          "description": "Diagnostik biete ich ausschließlich in Wien, im Rahmen meiner Tätigkeit im Institut TESTIFIED an. Weitere Infos finden Sie unter",
+          "hrefLabel": "www.testified.at",
+          "href": "https://www.testified.at"
+        }
+      ]
+    }
+  ]
+}

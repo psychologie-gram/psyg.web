@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TinaIsland from '@tinacms/astro/TinaIsland.astro';
+
+import EditablePageContent from '../components/tina/EditablePageContent.astro';
+import { loadTinaPage } from '../lib/tina/data';
+import { islands } from '../lib/tina/islands';
+
+const { page, site, allPages, navigationPages, pageDocument, siteDocument, pageDocuments } = await loadTinaPage('angebot.json');
+---
+
+<BaseLayout
+	title={page.title}
+	description={page.description}
+	currentPath={page.route}
+	pages={navigationPages}
+	allPages={allPages}
+	site={site}
+	siteDocument={siteDocument}
+	pageSources={pageDocuments}
+>
+	<TinaIsland name="pageContent" wrapper={islands.pageContent.wrapper} params={{ filename: 'angebot.json' }} primary>
+		<EditablePageContent pageDocument={pageDocument} siteDocument={siteDocument} />
+	</TinaIsland>
+</BaseLayout>

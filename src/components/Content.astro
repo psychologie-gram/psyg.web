@@ -1,0 +1,54 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+
+import { resolveCmsHref } from '../lib/links';
+import type { ContentBlock } from '../lib/site-data';
+import { indexedStringList, indexedRecordList, type TinaPageBlockDocument } from '../lib/tina/data';
+import Container from './ui/Container.astro';
+import RichText from './RichText.astro';
+import Section from './ui/Section.astro';
+
+interface Props {
+	block: ContentBlock;
+	source?: TinaPageBlockDocument | null;
+}
+
+const { block, source } = Astro.props;
+const paragraphSources = indexedStringList(source?.paragraphs);
+const linkSources = indexedRecordList(source?.links);
+---
+
+<Section tight>
+	<Container width="narrow">
+		{block.title && <h2 class="section-title mb-6" data-tina-field={tinaField(source, 'title')}>{block.title}</h2>}
+		{block.body ? (
+			<RichText content={block.body} tinaField={tinaField(source, 'body')} />
+		) : (
+			<div class="prose-flow" data-tina-field={tinaField(source, 'paragraphs')}>
+				{block.paragraphs.map((paragraph, index) => <p data-tina-field={tinaField(source, 'paragraphs', paragraphSources[index]?.index ?? index)}>{paragraph}</p>)}
+			</div>
+		)}
+		{block.links.length > 0 && (
+			<div class="prose-flow">
+				<ul>
+					{block.links.map((item, index) => {
+						const itemSource = linkSources[index]?.value;
+						const href = resolveCmsHref(item.href);
+						return (
+							<li>
+								{item.label && <strong data-tina-field={tinaField(itemSource, 'label')}>{item.label}: </strong>}
+								{href ? (
+									<a href={href} data-tina-field={tinaField(itemSource, 'href')}>
+										<span data-tina-field={tinaField(itemSource, 'text')}>{item.text}</span>
+									</a>
+								) : (
+									<span data-tina-field={tinaField(itemSource, 'text')}>{item.text}</span>
+								)}
+							</li>
+						);
+					})}
+				</ul>
+			</div>
+		)}
+	</Container>
+</Section>

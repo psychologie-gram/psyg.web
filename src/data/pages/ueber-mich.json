@@ -1,0 +1,164 @@
+{
+  "order": 2,
+  "route": "/über-mich",
+  "title": "Über mich",
+  "navTitle": "Über mich",
+  "description": "Mehr über Alexandra Gram, ihren beruflichen Hintergrund und die Haltung, mit der sie Menschen therapeutisch begleitet.",
+  "blocks": [
+    {
+      "_template": "hero",
+      "visible": true,
+      "variant": "portrait-tall",
+      "title": "Über mich",
+      "intro": "Geboren und aufgewachsen in Niederösterreich, zog es mich für mein Studium, meine postgraduelle Ausbildung und auch meine Berufstätigkeit nach Wien.",
+      "image": "/images/uploads/alexandra-gram-about.jpg",
+      "imageAlt": "Portrait von Alexandra Gram, MSc.",
+      "primaryCta": {
+        "label": "Mehr zu meinen Ausbildungen & Berufserfahrung",
+        "href": "/ausbildungen-berufserfahrung"
+      }
+    },
+    {
+      "_template": "content",
+      "visible": true,
+      "title": "",
+      "body": {
+        "type": "root",
+        "children": [
+          {
+            "type": "p",
+            "children": [
+              {
+                "type": "text",
+                "text": "Um meinen Wurzeln treu zu bleiben, biete ich mittlerweile neben meiner Haupttätigkeit in Wien ("
+              },
+              {
+                "type": "a",
+                "url": "https://www.testified.at",
+                "title": null,
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "www.testified.at"
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": ") auch klinisch-psychologische Beratung & psychologische Therapie in St. Pölten an."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "type": "text",
+                "text": "Bereits während des Studiums begann mein Interesse am Thema "
+              },
+              {
+                "type": "text",
+                "text": "Neurodiversität",
+                "bold": true
+              },
+              {
+                "type": "text",
+                "text": " (= neurologische Vielfalt, dazu zählt z.B. Autismus & ADHS) zu wachsen. Erste Erfahrungen in diesem Bereich machten mir klar, dass ich in meiner Tätigkeit als Klinische Psychologin neurodivergente Menschen auf ihrem Lebensweg begleiten, bei Schwierigkeiten unterstützen und deren psychisches Wohlbefinden bestmöglich fördern möchte."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "type": "text",
+                "text": "Besonders im Bereich des "
+              },
+              {
+                "type": "text",
+                "text": "Autismus-Spektrums",
+                "bold": true
+              },
+              {
+                "type": "text",
+                "text": " und/oder der "
+              },
+              {
+                "type": "text",
+                "text": "AD(H)S",
+                "bold": true
+              },
+              {
+                "type": "text",
+                "text": " verfüge ich über einen breiten Erfahrungsschatz - insbesondere auch in der Arbeit mit neurodivergenten Frauen, welche in Forschung und Praxis oft übersehen werden."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "type": "text",
+                "text": "Natürlich arbeite ich auch gerne mit neurotypischen Menschen (= Menschen ohne neurologischen Auffälligkeiten), wobei hierbei meine Schwerpunkte vor allem auf "
+              },
+              {
+                "type": "text",
+                "text": "emotionalen und sozialen Schwierigkeiten",
+                "bold": true
+              },
+              {
+                "type": "text",
+                "text": ", im "
+              },
+              {
+                "type": "text",
+                "text": "Umgang mit Stress",
+                "bold": true
+              },
+              {
+                "type": "text",
+                "text": " sowie in der "
+              },
+              {
+                "type": "text",
+                "text": "Selbstwertstärkung",
+                "bold": true
+              },
+              {
+                "type": "text",
+                "text": " liegen."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "type": "text",
+                "text": "Ich durfte bereits verschiedenste Bereiche der Psychologie kennenlernen. Somit erwartet Sie eine Vielzahl "
+              },
+              {
+                "type": "text",
+                "text": "anerkannter psychologischer Methoden",
+                "bold": true
+              },
+              {
+                "type": "text",
+                "text": ", angepasst an Ihre individuellen Bedürfnisse und selbstverständlich immer basierend auf den neuesten wissenschaftlichen Erkenntnissen. Ich begegne Ihnen "
+              },
+              {
+                "type": "text",
+                "text": "vorurteilsfrei, wertschätzend und geduldig",
+                "italic": true
+              },
+              {
+                "type": "text",
+                "text": " und habe dabei stets Ihre individuellen Stärken & Ressourcen im Blick."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

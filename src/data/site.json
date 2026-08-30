@@ -1,0 +1,32 @@
+{
+  "name": "Psychologie Gram",
+  "lang": "de-AT",
+  "siteUrl": "https://www.psychologie-gram.at",
+  "description": "Klinisch-psychologische Therapie und Beratung in St. Pölten mit Fokus auf Neurodivergenz, Stressbewältigung und persönliche Entwicklung.",
+  "owner": "Alexandra Gram, MSc",
+  "jobTitle": "Klinische Psychologin, MSc.",
+  "email": "office@psychologie-gram.at",
+  "phone": "+4367762839427",
+  "phoneDisplay": "+43 677 62839427",
+  "addressLines": [
+    "Spratzerner Hauptstraße 71a/Top 2",
+    "3100 St. Pölten"
+  ],
+  "officeHours": [
+    "Dienstag: 13:00 – 19:00"
+  ],
+  "ui": {
+    "skipLinkLabel": "Zum Inhalt springen",
+    "menuLabel": "Menü",
+    "headerCta": {
+      "label": "Erstgespräch vereinbaren",
+      "href": "/kontakt"
+    },
+    "formSubject": "Kontaktanfrage",
+    "formNamePlaceholder": "Name",
+    "formEmailPlaceholder": "E-Mail-Adresse",
+    "formMessagePlaceholder": "Nachricht",
+    "formSubmitLabel": "Absenden",
+    "footerCopyright": "2026"
+  }
+}

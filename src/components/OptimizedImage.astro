@@ -1,0 +1,91 @@
+---
+import { Picture } from 'astro:assets';
+
+import { resolveMediaAsset } from '../lib/media';
+
+interface Props {
+	src?: string | null;
+	alt?: string | null;
+	width?: number;
+	height?: number;
+	widths?: number[];
+	sizes?: string;
+	class?: string;
+	loading?: 'eager' | 'lazy';
+	decoding?: 'async' | 'sync' | 'auto';
+	priority?: boolean;
+	fit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
+	position?: string;
+	tinaField?: string;
+	decorative?: boolean;
+	pictureClass?: string;
+}
+
+const {
+	src,
+	alt = '',
+	width,
+	height,
+	widths,
+	sizes,
+	class: className,
+	loading,
+	decoding,
+	priority,
+	fit,
+	position,
+	tinaField: field,
+	decorative = false,
+	pictureClass
+} = Astro.props;
+const asset = await resolveMediaAsset(src);
+
+function fallbackFormat(format: string): 'jpeg' | 'jpg' | 'png' | 'webp' | 'avif' {
+	switch (format) {
+		case 'jpeg':
+		case 'jpg':
+		case 'png':
+		case 'webp':
+		case 'avif':
+			return format;
+		default:
+			return 'png';
+	}
+}
+---
+
+{asset &&
+	(asset.kind === 'optimized' ? (
+		<Picture
+			src={asset.source}
+			alt={alt ?? ''}
+			width={width}
+			height={height}
+			widths={widths}
+			sizes={sizes}
+			formats={['avif', 'webp']}
+			fallbackFormat={fallbackFormat(asset.source.format)}
+			loading={loading}
+			decoding={decoding}
+			priority={priority}
+			fit={fit}
+			position={position}
+			class={className}
+			data-tina-field={field}
+			aria-hidden={decorative || undefined}
+			pictureAttributes={{ class: pictureClass }}
+		/>
+	) : (
+		<img
+			src={asset.source}
+			alt={alt ?? ''}
+			width={width}
+			height={height}
+			loading={priority ? 'eager' : loading}
+			decoding={priority ? 'sync' : decoding}
+			fetchpriority={priority ? 'high' : undefined}
+			class={className}
+			data-tina-field={field}
+			aria-hidden={decorative || undefined}
+		/>
+	))}

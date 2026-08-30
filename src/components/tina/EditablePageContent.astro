@@ -1,0 +1,83 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+
+import Callout from '../Callout.astro';
+import CardGrid from '../CardGrid.astro';
+import Contact from '../Contact.astro';
+import Content from '../Content.astro';
+import Hero from '../Hero.astro';
+import LegalContent from '../LegalContent.astro';
+import Pricing from '../Pricing.astro';
+import RichText from '../RichText.astro';
+import Section from '../Section.astro';
+import Timeline from '../Timeline.astro';
+import {
+	indexedList,
+	indexedStringList,
+	normalizePageDocument,
+	normalizeSiteDocument,
+	type TinaPageDocument,
+	type TinaSiteDocument
+} from '../../lib/tina/data';
+
+interface Props {
+	pageDocument: TinaPageDocument;
+	siteDocument: TinaSiteDocument;
+}
+
+const { pageDocument, siteDocument } = Astro.props;
+const page = normalizePageDocument(pageDocument);
+const site = normalizeSiteDocument(siteDocument);
+const blockSources = indexedList(pageDocument.blocks);
+---
+
+{
+	page.blocks.map((block, index) => {
+		const source = blockSources[index]?.value;
+		const blockMarker = tinaField(pageDocument, 'blocks', blockSources[index]?.index ?? index);
+		const previousBlock = page.blocks[index - 1];
+		const nextBlock = page.blocks[index + 1];
+		const portraitContent =
+			nextBlock?._template === 'content' && nextBlock.visible ? nextBlock : undefined;
+		const isInlineContent =
+			block._template === 'content' &&
+			previousBlock?.visible &&
+			previousBlock._template === 'hero' &&
+			previousBlock.variant === 'portrait-tall';
+		const portraitContentSource = blockSources[index + 1]?.value;
+		const portraitParagraphSources = indexedStringList(portraitContentSource?.paragraphs);
+		if (!block.visible || isInlineContent) return null;
+		return (
+			<div data-tina-field={blockMarker}>
+				{block._template === 'hero' && (
+					<Hero hero={block} site={site} source={source}>
+						{block.variant === 'portrait-tall' && portraitContent && (
+							portraitContent.body ? (
+								<RichText
+									slot="inline-body"
+									class="prose-flow mt-6 max-w-[38rem]"
+									content={portraitContent.body}
+									tinaField={tinaField(portraitContentSource, 'body')}
+								/>
+							) : (
+								<div slot="inline-body" class="prose-flow mt-6 max-w-[38rem]" data-tina-field={tinaField(portraitContentSource, 'paragraphs')}>
+									{portraitContent.paragraphs.map((paragraph, paragraphIndex) => (
+										<p data-tina-field={tinaField(portraitContentSource, 'paragraphs', portraitParagraphSources[paragraphIndex]?.index ?? paragraphIndex)}>{paragraph}</p>
+									))}
+								</div>
+							)
+						)}
+					</Hero>
+				)}
+				{block._template === 'focus' && <Section block={block} source={source} />}
+				{block._template === 'services' && <CardGrid block={block} source={source} />}
+				{block._template === 'content' && <Content block={block} source={source} />}
+				{block._template === 'timeline' && <Timeline block={block} source={source} />}
+				{block._template === 'pricing' && <Pricing block={block} source={source} />}
+				{block._template === 'callout' && <Callout block={block} source={source} />}
+				{block._template === 'contact' && <Contact contact={block} site={site} contactSource={source} siteSource={siteDocument} />}
+				{block._template === 'legal' && <LegalContent block={block} source={source} />}
+			</div>
+		);
+	})
+}

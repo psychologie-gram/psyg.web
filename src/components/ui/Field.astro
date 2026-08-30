@@ -1,0 +1,38 @@
+---
+interface Props {
+	name: string;
+	label: string;
+	type?: 'text' | 'email';
+	placeholder?: string;
+	autocomplete?: string;
+	multiline?: boolean;
+	tinaField?: string;
+}
+
+const { name, label, type = 'text', placeholder, autocomplete, multiline = false, tinaField: field } = Astro.props;
+---
+
+<label class="form-control w-full">
+	<span class="label">
+		<span class="label-text">{label}</span>
+	</span>
+	{
+		multiline ? (
+			<textarea
+				class="textarea textarea-bordered min-h-40 w-full"
+				name={name}
+				placeholder={placeholder}
+				data-tina-field={field}
+			></textarea>
+		) : (
+			<input
+				class="input input-bordered w-full"
+				type={type}
+				name={name}
+				placeholder={placeholder}
+				autocomplete={autocomplete}
+				data-tina-field={field}
+			/>
+		)
+	}
+</label>

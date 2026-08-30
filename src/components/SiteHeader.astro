@@ -1,0 +1,65 @@
+---
+import { tinaField } from "@tinacms/astro/tina-field";
+
+import { resolveCmsHref } from "../lib/links";
+import type { TinaPageListDocument, TinaSiteDocument } from "../lib/tina/data";
+import MobileNavigation from "./MobileNavigation.astro";
+import Navigation from "./Navigation.astro";
+import Container from "./ui/Container.astro";
+import Button from "./ui/Button.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+import OptimizedImage from "./OptimizedImage.astro";
+
+import type { PageData, SiteSettings } from "../lib/site-data";
+
+interface Props {
+  pages: PageData[];
+  currentPath: string;
+  site: SiteSettings;
+  siteSource: TinaSiteDocument;
+  pageSources: TinaPageListDocument[];
+}
+
+const { pages, currentPath, site, siteSource, pageSources } = Astro.props;
+const headerCtaHref = resolveCmsHref(site.ui.headerCta.href) ?? "#";
+---
+
+<header class="sticky top-0 z-40 bg-[var(--bg)] backdrop-blur-sm">
+    <Container>
+        <div class="flex items-center justify-between gap-4 py-4">
+            <a href="/"
+               class="flex min-w-0 items-center gap-2 sm:gap-8 text-[var(--text)]">
+                <OptimizedImage
+                        src="/images/uploads/ag_logo_1536x1536.png"
+                        alt=""
+                        width={64}
+                        height={64}
+                        widths={[48, 64, 96, 128]}
+                        sizes="(min-width: 640px) 4rem, 3rem"
+                        priority
+                        class="h-12 w-12 shrink-0 scale-125 object-contain sm:h-16 sm:w-16"
+                        decorative
+                        pictureClass="block shrink-0"
+                />
+                <span class="block min-w-0 text-lg truncate font-semibold tracking-[-0.03em] sm:text-xl">
+					<span
+                  data-tina-field={tinaField(siteSource, "name")}>{site.name}</span>
+				</span>
+            </a>
+
+            <div class="hidden items-center gap-2 xl:flex">
+                <Navigation pages={pages} currentPath={currentPath} pageSources={pageSources}/>
+                <ThemeToggle/>
+                <div class="ml-2">
+                    <Button href={headerCtaHref} size="small"
+                            tinaField={tinaField(siteSource.ui?.headerCta, "href")}>
+                        <span data-tina-field={tinaField(siteSource.ui?.headerCta, "label")}>{site.ui.headerCta.label}</span>
+                    </Button>
+                </div>
+            </div>
+
+            <MobileNavigation pages={pages} currentPath={currentPath} site={site}
+                              siteSource={siteSource} pageSources={pageSources}/>
+        </div>
+    </Container>
+</header>

@@ -1,0 +1,72 @@
+---
+import { tinaField } from "@tinacms/astro/tina-field";
+
+import type { PricingBlock } from "../lib/site-data";
+import { indexedRecordList, type TinaPageBlockDocument } from "../lib/tina/data";
+import Card from "./ui/Card.astro";
+import Container from "./ui/Container.astro";
+import Section from "./ui/Section.astro";
+
+interface Props {
+  block: PricingBlock;
+  source?: TinaPageBlockDocument | null;
+}
+
+const { block, source } = Astro.props;
+const entrySources = indexedRecordList(source?.entries);
+---
+
+<Section tight class="pt-2 sm:pt-3">
+    <Container>
+      {block.title && <h2 class="section-title mb-6"
+                          data-tina-field={tinaField(source, "title")}>{block.title}</h2>}
+      {block.info && (
+        <Card as="aside" tone="accent" class="mb-4 p-3 sm:p-4">
+          <p class="text-sm leading-6 text-[var(--muted)]"
+             data-tina-field={tinaField(source, "info")}>{block.info}</p>
+        </Card>
+      )}
+        <div class="grid gap-4 md:grid-cols-2" data-tina-field={tinaField(source)}>
+          {block.entries.map((entry, index) => {
+            const sourceEntry = entrySources[index]?.value;
+            return (
+                    <Card
+                            class="group flex h-full flex-col overflow-hidden border-[var(--border-color)] bg-[var(--bg)] p-0 shadow-[var(--shadow-card)] transition-transform duration-200 hover:-translate-y-0.5"
+                            tinaField={tinaField(sourceEntry)}
+                    >
+                        <div class="flex min-h-12  items-start justify-between gap-4 border-b border-[var(--border-color)] border-l-4 border-l-[var(--accent)] px-4 py-4 sm:px-5 bg-base-200">
+                            <div class="min-w-0 ">
+                                <h3 class="text-[1.25rem] leading-7 text-[var(--text)] sm:text-[1.4rem]"
+                                    data-tina-field={tinaField(sourceEntry, "title")}>{entry.title}</h3>
+                                <div class="mt-1">
+                                  {entry.duration && (
+                                          <p class="inline-flex rounded-full border border-[var(--border-color)] bg-[var(--bg-soft)] px-2.5 py-0.5 text-xs leading-5 text-[var(--subtle)]"
+                                             data-tina-field={tinaField(sourceEntry, "duration")}>
+                                            {entry.duration}
+                                          </p>
+                                  )}
+                                </div>
+                            </div>
+                          {entry.price && (
+                                  <p class="shrink-0 rounded-full bg-[var(--accent)] px-3 py-1.5 text-sm font-semibold leading-6 text-[var(--color-primary-content)] sm:px-4 sm:text-base"
+                                     data-tina-field={tinaField(sourceEntry, "price")}>
+                                    {entry.price}
+                                  </p>
+                          )}
+                        </div>
+                        <div class="flex flex-1 flex-col px-5 py-5 sm:px-6 sm:py-6">
+                          {entry.description && <p class="text-base leading-8 text-[var(--muted)]"
+                                                   data-tina-field={tinaField(sourceEntry, "description")}>{entry.description}</p>}
+                          {entry.note && (
+                                  <p class="mt-5 border-t border-[var(--border-color)] pt-4 text-sm font-medium leading-7 text-[var(--subtle)]"
+                                     data-tina-field={tinaField(sourceEntry, "note")}>
+                                    {entry.note}
+                                  </p>
+                          )}
+                        </div>
+                    </Card>
+            );
+          })}
+        </div>
+    </Container>
+</Section>

@@ -1,0 +1,47 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+
+import type { FocusContent } from '../lib/site-data';
+import { indexedStringList, type TinaPageBlockDocument } from '../lib/tina/data';
+import Container from './ui/Container.astro';
+import SectionWrapper from './ui/Section.astro';
+
+interface Props {
+	block: FocusContent;
+	source?: TinaPageBlockDocument | null;
+}
+
+const { block, source } = Astro.props;
+const pointSources = indexedStringList(source?.points);
+---
+
+<SectionWrapper tight>
+	<Container>
+		<article
+			class="grid gap-4 py-6 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-8"
+			data-tina-field={source ? tinaField(source) : undefined}
+		>
+			<div>
+				<h2 class="section-title" data-tina-field={tinaField(source, 'title')}>{block.title}</h2>
+			</div>
+
+			<div class="max-w-3xl">
+				{block.intro && (
+					<p class="text-base leading-8 text-[var(--muted)]" data-tina-field={tinaField(source, 'intro')}>
+						{block.intro}
+					</p>
+				)}
+				{block.points.length > 0 && (
+					<ul class="mt-4 space-y-3">
+						{block.points.map((item, itemIndex) => (
+							<li class="focus-point flex gap-3 leading-8 text-[var(--muted)]">
+								<span aria-hidden="true" class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span>
+								<span data-tina-field={tinaField(source, 'points', pointSources[itemIndex]?.index ?? itemIndex)}>{item}</span>
+							</li>
+						))}
+					</ul>
+				)}
+			</div>
+		</article>
+	</Container>
+</SectionWrapper>

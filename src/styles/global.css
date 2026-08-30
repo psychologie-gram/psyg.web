@@ -1,0 +1,431 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+	themes: psychology --default, psychology-dark;
+}
+
+@plugin "daisyui/theme" {
+	name: "psychology";
+	default: true;
+	color-scheme: light;
+	--color-base-100: #fffdf7;
+	--color-base-200: #faf8f0;
+	--color-base-300: #e8dfd5;
+	--color-base-content: #111827;
+	--color-primary: #3a5f48;
+	--color-primary-content: #ffffff;
+	--color-secondary: #2f4d3a;
+	--color-secondary-content: #ffffff;
+	--color-accent: #5f856d;
+	--color-accent-content: #ffffff;
+	--color-neutral: #374151;
+	--color-neutral-content: #ffffff;
+	--color-info: #2563eb;
+	--color-success: #166534;
+	--color-warning: #a16207;
+	--color-error: #b91c1c;
+	--radius-selector: 0.5rem;
+	--radius-field: 0.75rem;
+	--radius-box: 1rem;
+	--size-selector: 0.25rem;
+	--size-field: 0.25rem;
+	--border: 1px;
+	--depth: 0;
+	--noise: 0;
+}
+
+@plugin "daisyui/theme" {
+	name: "psychology-dark";
+	color-scheme: dark;
+	--color-base-100: #101812;
+	--color-base-200: #17231b;
+	--color-base-300: #2b3b31;
+	--color-base-content: #edf6ef;
+	--color-primary: #8dbb9b;
+	--color-primary-content: #122019;
+	--color-secondary: #b6d7bd;
+	--color-secondary-content: #122019;
+	--color-accent: #95c5a3;
+	--color-accent-content: #122019;
+	--color-neutral: #c4d0c7;
+	--color-neutral-content: #122019;
+	--color-info: #8db5eb;
+	--color-success: #8fc99b;
+	--color-warning: #e5bd75;
+	--color-error: #ef9a9a;
+	--radius-selector: 0.5rem;
+	--radius-field: 0.75rem;
+	--radius-box: 1rem;
+	--size-selector: 0.25rem;
+	--size-field: 0.25rem;
+	--border: 1px;
+	--depth: 0;
+	--noise: 0;
+}
+
+@layer base {
+	:root {
+		color-scheme: light;
+		--bg: #fffdf7;
+		--bg-soft: #faf8f0;
+		--border-color: #e8dfd5;
+		--text: #383d3c;
+		--muted: #4b5563;
+		--subtle: #6b7280;
+		--accent: #3a5f48;
+		--accent-deep: #2f4d3a;
+		--shadow-card: 0 10px 24px -20px rgba(15, 23, 42, 0.14);
+		--selection-bg: rgba(58, 95, 72, 0.15);
+		--link-underline: rgba(58, 95, 72, 0.35);
+		--font-body:
+			"Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+			sans-serif;
+		--font-display:
+			"Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+			sans-serif;
+	}
+
+	:root[data-theme='psychology-dark'] {
+		color-scheme: dark;
+		--bg: #101812;
+		--bg-soft: #17231b;
+		--border-color: #2b3b31;
+		--text: #edf6ef;
+		--muted: #c3d0c7;
+		--subtle: #99aa9f;
+		--accent: #8dbb9b;
+		--accent-deep: #b6d7bd;
+		--shadow-card: 0 12px 30px -18px rgba(0, 0, 0, 0.58);
+		--selection-bg: rgba(141, 187, 155, 0.28);
+		--link-underline: rgba(182, 215, 189, 0.5);
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		min-height: 100vh;
+		background: var(--bg);
+		color: var(--text);
+		font-family: var(--font-body);
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	a {
+		transition:
+			color 180ms ease,
+			background-color 180ms ease,
+			border-color 180ms ease,
+			box-shadow 180ms ease,
+			transform 180ms ease;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: var(--font-display);
+		color: var(--text);
+		font-weight: 700;
+		letter-spacing: -0.03em;
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+	}
+
+	summary {
+		list-style: none;
+	}
+
+	summary::-webkit-details-marker {
+		display: none;
+	}
+
+	::selection {
+		background: var(--selection-bg);
+		color: var(--text);
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 3px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			scroll-behavior: auto !important;
+			transition-duration: 0.01ms !important;
+		}
+	}
+}
+
+@layer components {
+	.site-shell {
+		width: min(100% - 2rem, 70rem);
+		margin-inline: auto;
+	}
+
+	@media (min-width: 640px) {
+		.site-shell {
+			width: min(100% - 3rem, 70rem);
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.site-shell {
+			width: min(100% - 4rem, 70rem);
+		}
+	}
+
+	.section-space {
+		padding-block: clamp(2.75rem, 6vw, 4.5rem);
+	}
+
+	.section-space-tight {
+		padding-block: clamp(1.5rem, 4vw, 2.75rem);
+	}
+
+	.stack-divider > * + * {
+		border-top: 1px solid var(--border-color);
+	}
+
+	.skip-link {
+		position: absolute;
+		left: 1rem;
+		top: -4rem;
+		z-index: 60;
+		display: inline-flex;
+		align-items: center;
+		padding: 0.75rem 1rem;
+		border-radius: 0.5rem;
+		background: var(--accent);
+		color: var(--color-primary-content);
+	}
+
+	.skip-link:focus {
+		top: 1rem;
+	}
+
+	.overline {
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--accent);
+	}
+
+	.display-title {
+		max-width: 12ch;
+		font-size: clamp(2.8rem, 6vw, 4rem);
+		line-height: 1;
+	}
+
+	.hero-name,
+	.hero-subtitle {
+		font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+		line-height: 1.3;
+	}
+
+	.hero-name {
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--accent);
+	}
+
+	.hero-subtitle {
+		font-weight: 500;
+		color: var(--text);
+	}
+
+	.page-title {
+		max-width: 16ch;
+		font-size: clamp(2.2rem, 5vw, 3.4rem);
+		line-height: 1.04;
+	}
+
+	.section-title {
+		font-size: clamp(1.55rem, 3vw, 2.35rem);
+		line-height: 1.1;
+	}
+
+	.focus-point {
+		font-size: clamp(1.1rem, 2.2vw, 1.2rem);
+	}
+
+	.editorial-intro {
+		max-width: 41rem;
+		font-size: clamp(1rem, 1.3vw, 1.12rem);
+		line-height: 1.8;
+		color: var(--muted);
+	}
+
+	.body-measure {
+		max-width: 44rem;
+	}
+
+	.portrait-stage {
+		overflow: hidden;
+		border: 1px solid var(--border-color);
+		border-radius: 1rem;
+		background: var(--bg-soft);
+	}
+
+	.link[aria-current='page'] {
+		background: var(--bg-soft);
+		color: var(--accent-deep);
+	}
+
+	.mobile-nav-toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
+		min-height: 2.75rem;
+		padding: 0.7rem 1rem;
+		border: 1px solid var(--border-color);
+		border-radius: 0.6rem;
+		background: var(--bg);
+		color: var(--text);
+		font-size: 0.95rem;
+		font-weight: 600;
+	}
+
+	.mobile-nav[open] .mobile-nav-toggle {
+		border-color: var(--accent);
+		color: var(--accent-deep);
+	}
+
+	.mobile-nav-indicator {
+		transition: transform 180ms ease;
+	}
+
+	.mobile-nav[open] .mobile-nav-indicator {
+		transform: rotate(45deg);
+	}
+
+	.mobile-sheet {
+		border: 1px solid var(--border-color);
+		border-radius: 1rem;
+		background: var(--bg);
+		box-shadow: var(--shadow-card);
+	}
+
+	.theme-toggle {
+		min-width: 2.75rem;
+		color: var(--text);
+	}
+
+	.theme-icon {
+		display: inline-flex;
+		width: 1.1rem;
+		height: 1.1rem;
+	}
+
+	.theme-icon-sun {
+		display: none;
+	}
+
+	:root[data-theme='psychology-dark'] .theme-icon-moon {
+		display: none;
+	}
+
+	:root[data-theme='psychology-dark'] .theme-icon-sun {
+		display: inline-flex;
+	}
+
+	.rule-divider {
+		border-top: 1px solid var(--border-color);
+	}
+
+	.prose-flow {
+		max-width: 46rem;
+		font-size: 1rem;
+		line-height: 1.8;
+		color: var(--muted);
+		overflow-wrap: anywhere;
+	}
+
+	.prose-flow > * + * {
+		margin-top: 1rem;
+	}
+
+	.prose-flow.contact-copy {
+		font-size: 0.95rem;
+		line-height: 1.65;
+	}
+
+	.prose-flow.contact-copy > * + * {
+		margin-top: 0.65rem;
+	}
+
+	.prose-flow h2 {
+		margin-top: 2rem;
+		font-size: clamp(1.55rem, 3vw, 2.2rem);
+		line-height: 1.15;
+	}
+
+	.prose-flow h3 {
+		margin-top: 1.5rem;
+		font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+		line-height: 1.2;
+	}
+
+	.prose-flow p,
+	.prose-flow li,
+	.prose-flow a {
+		overflow-wrap: anywhere;
+	}
+
+	.prose-flow ul {
+		padding-left: 1.2rem;
+		list-style: disc;
+	}
+
+	.prose-flow li::marker {
+		color: var(--accent);
+	}
+
+	.prose-flow strong {
+		color: var(--text);
+		font-weight: 600;
+	}
+
+	.prose-flow mark {
+		border-radius: 0.25em;
+		background-color: var(--selection-bg);
+		color: var(--text);
+		padding-inline: 0.15em;
+	}
+
+	.prose-flow a {
+		color: var(--accent-deep);
+		text-decoration: underline;
+		text-decoration-color: var(--link-underline);
+		text-underline-offset: 0.25em;
+	}
+
+	.screen-reader {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+}

@@ -1,0 +1,89 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+
+import { resolveCmsHref } from '../lib/links';
+import type { LegalBlock } from '../lib/site-data';
+import { indexedRecordList, indexedStringList, type TinaPageBlockDocument } from '../lib/tina/data';
+import Container from './ui/Container.astro';
+import Section from './ui/Section.astro';
+
+interface Props {
+	block: LegalBlock;
+	source?: TinaPageBlockDocument | null;
+}
+
+const { block, source } = Astro.props;
+const sectionSources = indexedRecordList(source?.sections);
+---
+
+<Section tight class="pt-0">
+	<Container width="narrow">
+		<div class="rule-divider pt-6 sm:pt-8" data-tina-field={tinaField(source)}>
+			<div class="prose-flow">
+				{block.sections.map((section, sectionIndex) => {
+					const sourceSection = sectionSources[sectionIndex]?.value;
+					const itemSources = indexedRecordList(sourceSection?.items);
+					const subsectionSources = indexedRecordList(sourceSection?.subsections);
+					const paragraphSources = indexedStringList(sourceSection?.paragraphs);
+					return (
+						<section data-tina-field={tinaField(sourceSection)}>
+							<h2 data-tina-field={tinaField(sourceSection, 'title')}>{section.title}</h2>
+							{section.paragraphs.map((paragraph, index) => <p data-tina-field={tinaField(sourceSection, 'paragraphs', paragraphSources[index]?.index ?? index)}>{paragraph}</p>)}
+							{section.items.length > 0 && (
+								<ul>
+									{section.items.map((item, index) => {
+										const itemSource = itemSources[index]?.value;
+										const href = resolveCmsHref(item.href);
+										return (
+											<li>
+												{item.label && <strong data-tina-field={tinaField(itemSource, 'label')}>{item.label}: </strong>}
+												{href ? (
+													<a href={href} data-tina-field={tinaField(itemSource, 'href')}>
+														<span data-tina-field={tinaField(itemSource, 'text')}>{item.text}</span>
+													</a>
+												) : (
+													<span data-tina-field={tinaField(itemSource, 'text')}>{item.text}</span>
+												)}
+											</li>
+										);
+									})}
+								</ul>
+							)}
+							{section.subsections.map((subsection, subsectionIndex) => {
+								const sourceSubsection = subsectionSources[subsectionIndex]?.value;
+								const subsectionItemSources = indexedRecordList(sourceSubsection?.items);
+								const subsectionParagraphSources = indexedStringList(sourceSubsection?.paragraphs);
+								return (
+									<section data-tina-field={tinaField(sourceSubsection)}>
+										<h3 data-tina-field={tinaField(sourceSubsection, 'title')}>{subsection.title}</h3>
+										{subsection.paragraphs.map((paragraph, index) => <p data-tina-field={tinaField(sourceSubsection, 'paragraphs', subsectionParagraphSources[index]?.index ?? index)}>{paragraph}</p>)}
+										{subsection.items.length > 0 && (
+											<ul>
+												{subsection.items.map((item, index) => {
+													const itemSource = subsectionItemSources[index]?.value;
+													const href = resolveCmsHref(item.href);
+													return (
+														<li>
+															{item.label && <strong data-tina-field={tinaField(itemSource, 'label')}>{item.label}: </strong>}
+															{href ? (
+																<a href={href} data-tina-field={tinaField(itemSource, 'href')}>
+																	<span data-tina-field={tinaField(itemSource, 'text')}>{item.text}</span>
+																</a>
+															) : (
+																<span data-tina-field={tinaField(itemSource, 'text')}>{item.text}</span>
+															)}
+														</li>
+													);
+												})}
+											</ul>
+										)}
+									</section>
+								);
+							})}
+						</section>
+					);
+				})}
+			</div>
+		</div>
+	</Container>
+</Section>

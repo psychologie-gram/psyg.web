@@ -1,0 +1,137 @@
+{
+  "order": 7,
+  "route": "/impressum-datenschutz",
+  "title": "Impressum & Datenschutz",
+  "navTitle": "Impressum & Datenschutz",
+  "description": "Impressum und Datenschutzhinweise für die Website von Psychologie Gram.",
+  "showInNavigation": false,
+  "blocks": [
+    {
+      "_template": "hero",
+      "visible": true,
+      "variant": "standard",
+      "title": "Impressum & Datenschutz",
+      "intro": ""
+    },
+    {
+      "_template": "legal",
+      "visible": true,
+      "sections": [
+        {
+          "title": "Impressum",
+          "paragraphs": [
+            "Für den Inhalt verantwortlich: Alexandra Gram, MSc",
+            "Mitglied des Berufsverbandes österreichischer PsychologInnen (BÖP)",
+            "Seiteninhaberin, Medieninhaberin, Herausgeberin: Alexandra Gram, MSc",
+            "Bildrechte: Sarah Moser",
+            "Technische Umsetzung: Astro-basierte Website",
+            "Als Klinische Psychologin unterliege ich dem Psychologengesetz 2013, insbesondere den dort geregelten Berufs-, Fortbildungs-, Dokumentations- und Verschwiegenheitspflichten."
+          ],
+          "items": [
+            {
+              "label": "Mobil",
+              "text": "+43 677 62839427",
+              "href": "tel:+4367762839427"
+            },
+            {
+              "label": "E-Mail",
+              "text": "office@psychologie-gram.at",
+              "href": "mailto:office@psychologie-gram.at"
+            },
+            {
+              "label": "Website",
+              "text": "www.psychologie-gram.at",
+              "href": "https://www.psychologie-gram.at"
+            }
+          ]
+        },
+        {
+          "title": "Datenschutz",
+          "subsections": [
+            {
+              "title": "1. Verantwortliche und Kontaktdaten",
+              "paragraphs": [
+                "Verantwortliche für die Datenverarbeitung gemäß Datenschutzgrundverordung (DSGVO) ist:",
+                "Alexandra Gram, MSc",
+                "Spratzerner Hauptstraße 71a/Top 2",
+                "3100 St. Pölten",
+                "Der Schutz Ihrer Daten ist mir besonders wichtig. Ich bin für Sie unter den unten angeführten Kontaktdaten jederzeit für Ihre Fragen oder Ihren Widerruf erreichbar."
+              ],
+              "items": [
+                {
+                  "label": "E-Mail",
+                  "text": "office@psychologie-gram.at",
+                  "href": "mailto:office@psychologie-gram.at"
+                },
+                {
+                  "label": "Telefon",
+                  "text": "+43 677 62839427",
+                  "href": "tel:+4367762839427"
+                }
+              ]
+            },
+            {
+              "title": "2. Personenbezogene Daten und deren Verwendung",
+              "paragraphs": [
+                "Sofern Sie mir personenbezogene Daten zur Verfügung gestellt haben, nutze ich diese nur zu den mit Ihnen vereinbarten Zwecken oder wenn eine sonstige rechtliche Grundlage im Einklang mit der DSGVO vorliegt; dies unter Einhaltung der datenschutz- und zivilrechtlichen Bestimmungen.",
+                "Es werden nur solche personenbezogenen Daten erhoben, die für die Durchführung und Abwicklung meiner Leistungen erforderlich sind oder die Sie mir freiwillig zur Verfügung gestellt haben.",
+                "Ich werde die mir zur Verfügung gestellten Daten nicht für andere Zwecke als die durch Vertrag oder durch Ihre Einwilligung oder sonst durch eine Bestimmung im Einklang mit der DSGVO gedeckten Zwecken verarbeiten."
+              ]
+            },
+            {
+              "title": "3. Auskunft und Löschung",
+              "paragraphs": [
+                "Als Betroffene haben Sie jederzeit das Recht auf Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung sowie ein Recht auf Berichtigung, Datenübertragung, Widerspruch, Einschränkung der Bearbeitung sowie Sperrung oder Löschung unrichtiger bzw. unzulässig verarbeiteter Daten.",
+                "Insoweit sich Änderungen Ihrer persönlichen Daten ergeben, ersuche ich um entsprechende Mitteilung.",
+                "Sie haben jederzeit das Recht, eine erteilte Einwilligung zur Nutzung Ihrer personenbezogenen Daten zu widerrufen. Ihre Eingabe auf Auskunft, Löschung, Berichtigung, Widerspruch und/oder Datenübertragung, im letztgenannten Fall, sofern damit nicht ein unverhältnismäßiger Aufwand verursacht wird, kann an meine Adresse gerichtet werden.",
+                "Wenn Sie der Auffassung sind, dass die Verarbeitung Ihrer personenbezogenen Daten durch mich gegen das geltende Datenschutzrecht verstößt oder Ihre datenschutzrechtlichen Ansprüche in einer anderen Weise verletzt worden sind, besteht die Möglichkeit, sich bei der zuständigen Aufsichtsbehörde zu beschweren. In Österreich zuständig ist hierfür die Datenschutzbehörde."
+              ]
+            },
+            {
+              "title": "4. Datensicherheit",
+              "paragraphs": [
+                "Der Schutz Ihrer personenbezogenen Daten erfolgt durch entsprechende organisatorische und technische Vorkehrungen. Diese Vorkehrungen betreffen insbesondere den Schutz vor unerlaubtem, rechtswidrigem oder auch zufälligem Zugriff, Verarbeitung, Verlust, Verwendung und Manipulation.",
+                "Ungeachtet der Bemühungen der Einhaltung eines stets angemessen hohen Standes der Sorgfaltsanforderungen kann nicht ausgeschlossen werden, dass Informationen, die Sie mir über das Internet bekannt geben, von anderen Personen eingesehen und genutzt werden.",
+                "Bitte beachten Sie, dass ich daher keine wie immer geartete Haftung für die Offenlegung von Informationen aufgrund nicht von mir verursachter Fehler bei der Datenübertragung und/oder unautorisiertem Zugriff durch Dritte übernehme."
+              ]
+            },
+            {
+              "title": "5. Server-Log-Files",
+              "paragraphs": [
+                "Zur Optimierung der Website in Bezug auf die Systemperformance, Benutzerfreundlichkeit und Bereitstellung von nützlichen Informationen erhebt und speichert der Provider der Website automatisch Informationen in sogenannten Server-Log-Files, die Ihr Browser automatisch an mich übermittelt. Davon umfasst sind Ihre IP-Adresse, Browser- und Spracheinstellung, Betriebssystem, Referrer-URL, Internet-Service-Provider und Datum sowie Uhrzeit.",
+                "Eine Zusammenführung dieser Daten mit personenbezogenen Datenquellen wird von mir nicht vorgenommen. Ich behalte mir vor, die Daten nachträglich zu prüfen, wenn konkrete Anhaltspunkte für eine rechtswidrige Nutzung bekannt werden."
+              ]
+            },
+            {
+              "title": "6. Übermittlung von Daten an Dritte",
+              "paragraphs": [
+                "Eine Weiterleitung Ihrer Daten erfolgt ausschließlich auf Grundlage der DSGVO, insbesondere zur Erfüllung Ihres Auftrags oder aufgrund Ihrer vorherigen Einwilligung.",
+                "Grundsätzlich gebe ich keine Daten an Dritte weiter, außer es ergeben sich Verpflichtungen und Notwendigkeiten, die sich aus unserer Geschäftsbeziehung ergeben können (z.B.: Rechnungslegung, Buchhaltung)."
+              ]
+            },
+            {
+              "title": "7. Bekanntgabe von Datenpannen",
+              "paragraphs": [
+                "Ich bin bemüht sicherzustellen, dass Datenpannen frühzeitig erkannt und gegebenenfalls unverzüglich Ihnen bzw. der zuständigen Aufsichtsbehörde unter Einbezug der jeweiligen Datenkategorien, die betroffen sind, gemeldet werden."
+              ]
+            },
+            {
+              "title": "8. Aufbewahrung der Daten",
+              "paragraphs": [
+                "Ich bewahre Daten nicht länger auf als dies zur Erfüllung meiner vertraglichen bzw. gesetzlichen Verpflichtungen und zur Abwehr allfälliger Haftungsansprüche erforderlich ist."
+              ]
+            },
+            {
+              "title": "9. Cookies",
+              "paragraphs": [
+                "Meine Website verwendet so genannte Cookies. Dabei handelt es sich um kleine Textdateien, die mit Hilfe des Browsers auf Ihrem Endgerät abgelegt werden. Sie richten keinen Schaden an.",
+                "Cookies werden dazu genutzt, das Angebot meiner Website nutzerfreundlich zu gestalten. Einige Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen. Sie ermöglichen es, Ihren Browser beim nächsten Besuch wiederzuerkennen. Wenn Sie dies nicht wünschen, können Sie Ihren Browser so einrichten, dass er Sie über das Setzen von Cookies informiert und Sie dies nur im Einzelfall erlauben können.",
+                "Bei der Deaktivierung von Cookies kann die Funktionalität der Website eingeschränkt sein."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

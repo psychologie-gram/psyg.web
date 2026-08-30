@@ -1,0 +1,130 @@
+{
+  "order": 5,
+  "route": "/kontakt",
+  "title": "Kontakt",
+  "navTitle": "Kontakt",
+  "description": "Kontaktaufnahme, Praxiszeiten und Standort von Psychologie Gram in St. Pölten.",
+  "blocks": [
+    {
+      "_template": "hero",
+      "visible": true,
+      "variant": "standard",
+      "title": "Kontaktanfrage",
+      "intro": ""
+    },
+    {
+      "_template": "contact",
+      "visible": true,
+      "mode": "links",
+      "body": {
+        "type": "root",
+        "children": [
+          {
+            "type": "p",
+            "children": [
+              {
+                "type": "text",
+                "text": "Gerne können Sie mich telefonisch oder per Mail erreichen, um einen Termin zu vereinbaren oder weitere Informationen zu erhalten. Ich werde mich verlässlich bei Ihnen melden!"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "type": "text",
+                "text": "Meine Praxiszeiten sind: ",
+                "bold": true
+              },
+              {
+                "type": "text",
+                "text": "Dienstag: 13:00 – 19:00"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "type": "text",
+                "text": "Adresse: ",
+                "bold": true
+              },
+              {
+                "type": "text",
+                "text": "Spratzerner Hauptstraße 71a/Top 2"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "type": "text",
+                "text": "3100 St. Pölten"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "type": "text",
+                "text": "(1. Stock, leider nicht barrierefrei zugänglich)"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "type": "text",
+                "text": "Tel.: ",
+                "bold": true
+              },
+              {
+                "type": "a",
+                "url": "tel:+4367762839427",
+                "title": null,
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "+43 677 62839427"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "type": "text",
+                "text": "Mail: ",
+                "bold": true
+              },
+              {
+                "type": "a",
+                "url": "mailto:office@psychologie-gram.at",
+                "title": null,
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "office@psychologie-gram.at"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "image": "/images/uploads/praxis.jpg",
+      "imageAlt": "Praxisraum von Alexandra Gram",
+      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2660.92622604008!2d15.6259086!3d48.1695031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476d87d367d664f3%3A0x197e5729a330393e!2sAlexandra%20Gram%2C%20MSc.%20Klinische%20Psychologin!5e0!3m2!1sde!2sat!4v1788098301777!5m2!1sde!2sat",
+      "notice": {
+        "title": "Selbstverständlich LGBTQIA+ friendly!",
+        "text": "Ich biete Ihnen einen geschützten Rahmen. Meine Pronomen sind sie/ihr. Geben Sie mir gerne Bescheid, wie ich Sie ansprechen darf."
+      }
+    }
+  ]
+}

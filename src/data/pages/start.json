@@ -1,0 +1,37 @@
+{
+  "order": 1,
+  "route": "/",
+  "title": "Start",
+  "navTitle": "Start",
+  "showInNavigation": false,
+  "description": "Psychologische Therapie und Beratung in St. Pölten für Jugendliche und junge Erwachsene – wissenschaftlich fundiert, wertschätzend und neurodiversitätssensibel.",
+  "blocks": [
+    {
+      "_template": "hero",
+      "visible": true,
+      "variant": "portrait",
+      "eyebrow": "Alexandra Gram, MSc",
+      "title": "Klinische Psychologin",
+      "subtitle": "(Klinische Neuropsychologie)",
+      "intro": "Um die Herausforderungen des Lebens zu meistern, braucht es manchmal professionelle Unterstützung. Ich freue mich, Sie ein Stück auf Ihrem Weg Richtung Wohlbefinden & Lebensqualität zu begleiten.",
+      "image": "/images/uploads/alexandra-gram-portrait.jpg",
+      "imageAlt": "Portrait von Alexandra Gram, MSc.",
+      "primaryCta": {
+        "label": "Erstgespräch vereinbaren",
+        "href": "/kontakt"
+      }
+    },
+    {
+      "_template": "focus",
+      "visible": true,
+      "title": "Meine Schwerpunkte",
+      "points": [
+        "Das neurodivergente Spektrum in all seinen Varianten, insbesondere Autismus & AD(H)S",
+        "Emotionale & soziale Schwierigkeiten",
+        "Umgang mit Stress, Achtsamkeit & Entspannung",
+        "Veränderungen, Krankheitsbewältigung, Lebenskrisen",
+        "Selbstwertstärkung"
+      ]
+    }
+  ]
+}

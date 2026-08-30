@@ -1,0 +1,12 @@
+---
+import { resolveCmsHref } from '../lib/links';
+
+interface Props {
+	url: string;
+}
+
+const { url } = Astro.props;
+const href = resolveCmsHref(url);
+---
+
+{href ? <a href={href}><slot /></a> : <slot />}

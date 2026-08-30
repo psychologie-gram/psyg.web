@@ -1,0 +1,69 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+
+import type { SiteSettings } from '../lib/site-data';
+import type { TinaPageBlockDocument } from '../lib/tina/data';
+import { resolveMediaPath } from '../lib/media';
+import Card from './ui/Card.astro';
+import OptimizedImage from './OptimizedImage.astro';
+
+interface Props {
+	site: SiteSettings;
+	source?: TinaPageBlockDocument | null;
+	align?: 'start' | 'end';
+	src?: string;
+	width?: number;
+	height?: number;
+	imageClass?: string;
+	presentation?: 'framed' | 'natural';
+	borderless?: boolean;
+}
+
+const {
+	site,
+	source,
+	align = 'end',
+	src = '/images/uploads/alexandra-gram-portrait.jpg',
+	width = 550,
+	height = 644,
+	imageClass = 'aspect-[5/6] w-full object-cover object-[center_18%]',
+	presentation = 'framed',
+	borderless = false
+} = Astro.props;
+const imageSrc = resolveMediaPath(src) ?? '/images/uploads/alexandra-gram-portrait.jpg';
+const imageAltValue = source?.imageAlt;
+const imageAlt = (typeof imageAltValue === 'string' ? imageAltValue.trim() : '') || `Portrait von ${site.owner}`;
+const naturalPresentation = presentation === 'natural';
+const borderlessPresentation = borderless;
+---
+
+<Card
+	tone={borderlessPresentation ? 'plain' : 'subtle'}
+	bordered={!borderlessPresentation}
+	class:list={[
+		'mx-auto w-full overflow-hidden',
+		borderlessPresentation
+			? naturalPresentation
+				? 'max-w-[17rem] p-0'
+				: 'max-w-[30rem] p-0'
+			: naturalPresentation
+				? 'max-w-[17rem] p-2'
+				: 'max-w-[30rem] p-3',
+		align === 'start' ? 'lg:mr-auto' : 'lg:ml-auto'
+	]}
+>
+	<figure class:list={[borderlessPresentation ? 'overflow-hidden rounded-[1rem]' : naturalPresentation ? 'flex justify-center' : 'portrait-stage']} data-tina-field={tinaField(source, 'image')}>
+		<OptimizedImage
+			src={imageSrc}
+			alt={imageAlt}
+			width={width}
+			height={height}
+			widths={[Math.round(width * 0.6), width]}
+			sizes="(min-width: 1024px) 30rem, 100vw"
+			loading="eager"
+			decoding="async"
+			class:list={[imageClass, naturalPresentation && 'rounded-[0.8rem]']}
+			tinaField={tinaField(source, 'imageAlt')}
+		/>
+	</figure>
+</Card>

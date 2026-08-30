@@ -1,0 +1,35 @@
+{
+  "name": "psychologie-gram",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "tinacms dev -c \"astro dev\"",
+    "build": "tinacms build --local --skip-cloud-checks -c \"astro build\"",
+    "migrate:blocks": "node scripts/migrate-page-blocks.mjs",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/node": "^11.1.4",
+    "@astrojs/sitemap": "^3.7.3",
+    "@tailwindcss/vite": "^4.3.3",
+    "@tinacms/astro": "^0.6.1",
+    "astro": "^7.2.9",
+    "daisyui": "5.7.22",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  },
+  "allowScripts": {
+    "esbuild": true
+  },
+  "devDependencies": {
+    "@tinacms/cli": "^2.6.1",
+    "tinacms": "^3.12.1"
+  }
+}

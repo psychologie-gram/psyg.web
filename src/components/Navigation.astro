@@ -1,0 +1,37 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+
+import { resolveCmsHref } from '../lib/links';
+import type { PageData } from '../lib/site-data';
+import type { TinaPageListDocument } from '../lib/tina/data';
+import { isCurrentPath } from '../lib/navigation';
+import NavLink from './ui/NavLink.astro';
+
+interface Props {
+	pages: PageData[];
+	currentPath: string;
+	pageSources: TinaPageListDocument[];
+}
+
+const { pages, currentPath, pageSources } = Astro.props;
+---
+
+<nav aria-label="Hauptnavigation" class="hidden lg:block">
+	<ul class="flex items-center gap-7 xl:gap-8">
+		{
+			pages.map((page) => {
+				const active = isCurrentPath(currentPath, page.route);
+				const sourcePage = pageSources.find((source) => source.route === page.route);
+				const href = resolveCmsHref(page.route) ?? '#';
+
+				return (
+					<li>
+						<NavLink href={href} active={active} tinaField={tinaField(sourcePage, 'route')}>
+							<span data-tina-field={tinaField(sourcePage, 'navTitle')}>{page.navTitle}</span>
+						</NavLink>
+					</li>
+				);
+			})
+		}
+	</ul>
+</nav>

@@ -1,0 +1,12 @@
+---
+import OptimizedImage from './OptimizedImage.astro';
+
+interface Props {
+	url?: string | null;
+	alt?: string | null;
+}
+
+const { url, alt } = Astro.props;
+---
+
+<OptimizedImage src={url} alt={alt} loading="lazy" />

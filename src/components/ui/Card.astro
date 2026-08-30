@@ -1,0 +1,29 @@
+---
+interface Props {
+	tone?: 'default' | 'subtle' | 'accent' | 'plain';
+	bordered?: boolean;
+	class?: string;
+	tinaField?: string;
+	as?: 'article' | 'aside' | 'div' | 'section';
+}
+
+const props = Astro.props as Props;
+const { tone = 'default', bordered = true, class: additionalClass, tinaField: field, as = 'article' } = props;
+const Tag = as;
+---
+
+<Tag
+	class:list={[
+		'card',
+		bordered && 'border',
+		tone !== 'plain' && 'bg-[var(--bg)]',
+		tone === 'subtle' && bordered && 'border-base-300',
+		tone === 'accent' && bordered && 'border-primary border-l-4',
+		tone === 'default' && bordered && 'border-base-300',
+		tone === 'plain' && 'bg-transparent',
+		additionalClass
+	]}
+	data-tina-field={field}
+>
+	<slot />
+</Tag>
