@@ -3,11 +3,10 @@
   "route": "/",
   "title": "Start",
   "navTitle": "Start",
+  "description": "Psychologische Therapie und Beratung in St. Pölten für Erwachsene – wissenschaftlich fundiert, wertschätzend und neurodiversitätssensibel.",
   "showInNavigation": false,
-  "description": "Psychologische Therapie und Beratung in St. Pölten für Jugendliche und junge Erwachsene – wissenschaftlich fundiert, wertschätzend und neurodiversitätssensibel.",
   "blocks": [
     {
-      "_template": "hero",
       "visible": true,
       "variant": "portrait",
       "eyebrow": "Alexandra Gram, MSc",
@@ -19,10 +18,10 @@
       "primaryCta": {
         "label": "Erstgespräch vereinbaren",
         "href": "/kontakt"
-      }
+      },
+      "_template": "hero"
     },
     {
-      "_template": "focus",
       "visible": true,
       "title": "Meine Schwerpunkte",
       "points": [
@@ -31,7 +30,8 @@
         "Umgang mit Stress, Achtsamkeit & Entspannung",
         "Veränderungen, Krankheitsbewältigung, Lebenskrisen",
         "Selbstwertstärkung"
-      ]
+      ],
+      "_template": "focus"
     }
   ]
 }
