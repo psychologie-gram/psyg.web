@@ -6,14 +6,13 @@
   "description": "Kontaktaufnahme, Praxiszeiten und Standort von Psychologie Gram in St. Pölten.",
   "blocks": [
     {
-      "_template": "hero",
       "visible": true,
       "variant": "standard",
       "title": "Kontaktanfrage",
-      "intro": ""
+      "intro": "",
+      "_template": "hero"
     },
     {
-      "_template": "contact",
       "visible": true,
       "mode": "links",
       "body": {
@@ -24,46 +23,63 @@
             "children": [
               {
                 "type": "text",
-                "text": "Gerne können Sie mich telefonisch oder per Mail erreichen, um einen Termin zu vereinbaren oder weitere Informationen zu erhalten. Ich werde mich verlässlich bei Ihnen melden!"
-              }
-            ]
-          },
-          {
-            "type": "p",
-            "children": [
-              {
-                "type": "text",
-                "text": "Meine Praxiszeiten sind: ",
-                "bold": true
+                "text": "Gerne können Sie mich telefonisch oder per Mail erreichen, um einen Termin zu vereinbaren oder weitere Informationen zu erhalten. Ich werde mich verlässlich bei Ihnen melden!  \n\n"
               },
               {
                 "type": "text",
-                "text": "Dienstag: 13:00 – 19:00"
+                "id": "9Zn8wpbl18",
+                "text": "\n"
               }
-            ]
+            ],
+            "id": "VmnAE1Gr2q"
           },
           {
             "type": "p",
             "children": [
               {
                 "type": "text",
-                "text": "Adresse: ",
-                "bold": true
+                "id": "ZOtIsSBpNm",
+                "text": "Praxiszeiten",
+                "italic": true
               },
               {
                 "type": "text",
-                "text": "Spratzerner Hauptstraße 71a/Top 2"
+                "id": "kc1qr2JLja",
+                "text": ":"
+              },
+              {
+                "type": "text",
+                "bold": true,
+                "id": "Ij3VLkVw-K",
+                "text": " d"
+              },
+              {
+                "type": "text",
+                "text": "ienstags, 13:00 – 19:30",
+                "bold": true
               }
-            ]
+            ],
+            "id": "aVBcZU5ZHX"
           },
           {
             "type": "p",
             "children": [
+              {
+                "type": "text",
+                "text": "Adresse",
+                "italic": true
+              },
+              {
+                "type": "text",
+                "id": "lg9nWlMW0V",
+                "text": ": Spratzerner Hauptstraße 71a/Top 2, "
+              },
               {
                 "type": "text",
                 "text": "3100 St. Pölten"
               }
-            ]
+            ],
+            "id": "LT5_eOboFS"
           },
           {
             "type": "p",
@@ -72,15 +88,15 @@
                 "type": "text",
                 "text": "(1. Stock, leider nicht barrierefrei zugänglich)"
               }
-            ]
+            ],
+            "id": "KgaHzIyvB4"
           },
           {
             "type": "p",
             "children": [
               {
                 "type": "text",
-                "text": "Tel.: ",
-                "bold": true
+                "text": "Tel.: "
               },
               {
                 "type": "a",
@@ -89,18 +105,28 @@
                 "children": [
                   {
                     "type": "text",
-                    "text": "+43 677 62839427"
+                    "text": "+43 677 62839427",
+                    "bold": true
                   }
                 ]
+              },
+              {
+                "text": ""
               }
-            ]
+            ],
+            "id": "CSPsB1mhut"
           },
           {
             "type": "p",
             "children": [
               {
                 "type": "text",
-                "text": "Mail: ",
+                "text": "Mail:"
+              },
+              {
+                "type": "text",
+                "id": "jCXbQF5knP",
+                "text": " ",
                 "bold": true
               },
               {
@@ -110,11 +136,16 @@
                 "children": [
                   {
                     "type": "text",
-                    "text": "office@psychologie-gram.at"
+                    "text": "office@psychologie-gram.at",
+                    "bold": true
                   }
                 ]
+              },
+              {
+                "text": ""
               }
-            ]
+            ],
+            "id": "g9TfD16Yx5"
           }
         ]
       },
@@ -124,7 +155,8 @@
       "notice": {
         "title": "Selbstverständlich LGBTQIA+ friendly!",
         "text": "Ich biete Ihnen einen geschützten Rahmen. Meine Pronomen sind sie/ihr. Geben Sie mir gerne Bescheid, wie ich Sie ansprechen darf."
-      }
+      },
+      "_template": "contact"
     }
   ]
 }
