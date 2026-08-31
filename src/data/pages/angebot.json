@@ -20,7 +20,10 @@
           "title": "Psychologische Therapie",
           "image": "/images/uploads/angebot-psychologische-therapie.svg",
           "imageAlt": "Illustration eines Wegweisers als Symbol für verschiedene Wege",
-          "description": "Professionelle Unterstützung bei der Bewältigung psychischer, sozialer und körperlicher Schwierigkeiten | Hilfe, Gedanken, Gefühle und Verhaltensmuster besser zu verstehen und neue Wege im Umgang damit zu entwickeln"
+          "description": "Professionelle Unterstützung bei der Bewältigung psychischer, sozialer und körperlicher Schwierigkeiten ",
+          "items": [
+            "Hilfe, Gedanken, Gefühle und Verhaltensmuster besser zu verstehen und neue Wege im Umgang damit zu entwickeln"
+          ]
         },
         {
           "title": "Beratung",
@@ -50,7 +53,8 @@
           "title": "Vortragstätigkeiten",
           "image": "/images/uploads/angebot-vortragstaetigkeiten.svg",
           "imageAlt": "Illustration einer Person bei einem öffentlichen Vortrag",
-          "description": "Auf Anfrage biete ich gerne Fachvorträge zu meinen Schwerpunktthemen an."
+          "description": "Auf Anfrage biete ich gerne Fachvorträge zu meinen Schwerpunktthemen an.",
+          "items": []
         },
         {
           "title": "Klinisch-psychologische Diagnostik",
