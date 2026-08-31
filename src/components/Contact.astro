@@ -3,7 +3,6 @@ import { tinaField } from '@tinacms/astro/tina-field';
 
 import type { ContactContent, SiteSettings } from '../lib/site-data';
 import { resolveGoogleMapsEmbedUrl } from '../lib/maps';
-import { resolveMediaPath } from '../lib/media';
 import {
 	asTinaRecord,
 	type TinaPageBlockDocument,
@@ -14,7 +13,6 @@ import Card from './ui/Card.astro';
 import Container from './ui/Container.astro';
 import Field from './ui/Field.astro';
 import RichText from './RichText.astro';
-import OptimizedImage from './OptimizedImage.astro';
 import Section from './ui/Section.astro';
 
 interface Props {
@@ -29,7 +27,7 @@ const { contact, site, showForm = contact.mode === 'form', contactSource, siteSo
 const ui = site.ui;
 const uiSource = siteSource?.ui;
 const noticeSource = asTinaRecord(contactSource?.notice);
-const imageSrc = resolveMediaPath(contact.image);
+const imageSrc = contact.image?.trim();
 const imageAlt = contact.imageAlt?.trim() || `Praxisraum von ${site.owner}`;
 const mapEmbedUrl = resolveGoogleMapsEmbedUrl(contact.mapEmbedUrl);
 const hasLocationCard = Boolean(imageSrc || mapEmbedUrl);
@@ -59,17 +57,15 @@ const hasLocationCard = Boolean(imageSrc || mapEmbedUrl);
 				<Card as="div" class="overflow-hidden p-0">
 					{imageSrc && (
 						<figure class="border-b border-[var(--border-color)] bg-[var(--bg-soft)]" data-tina-field={tinaField(contactSource, 'image')}>
-							<OptimizedImage
+							<img
 								src={imageSrc}
 								alt={imageAlt}
 								width={800}
 								height={533}
-								widths={[400, 800]}
-								sizes="(min-width: 1024px) 50vw, 100vw"
 								loading="lazy"
 								decoding="async"
 								class="aspect-[16/9] w-full object-cover"
-								tinaField={tinaField(contactSource, 'imageAlt')}
+								data-tina-field={tinaField(contactSource, 'imageAlt')}
 							/>
 						</figure>
 					)}

@@ -8,7 +8,6 @@ import Navigation from "./Navigation.astro";
 import Container from "./ui/Container.astro";
 import Button from "./ui/Button.astro";
 import ThemeToggle from "./ThemeToggle.astro";
-import OptimizedImage from "./OptimizedImage.astro";
 
 import type { PageData, SiteSettings } from "../lib/site-data";
 
@@ -29,17 +28,16 @@ const headerCtaHref = resolveCmsHref(site.ui.headerCta.href) ?? "#";
         <div class="flex items-center justify-between gap-4 py-4">
             <a href="/"
                class="flex min-w-0 items-center gap-2 sm:gap-8 text-[var(--text)]">
-                <OptimizedImage
-                        src="/images/uploads/ag_logo_1536x1536.png"
-                        alt=""
-                        width={64}
-                        height={64}
-                        widths={[48, 64, 96, 128]}
-                        sizes="(min-width: 640px) 4rem, 3rem"
-                        priority
-                        class="h-12 w-12 shrink-0 scale-125 object-contain sm:h-16 sm:w-16"
-                        decorative
-                        pictureClass="block shrink-0"
+                <img
+                    src="/images/uploads/ag_logo_1536x1536.png"
+                    alt=""
+                    width="64"
+                    height="64"
+                    loading="eager"
+                    decoding="sync"
+                    fetchpriority="high"
+                    class="block h-12 w-12 shrink-0 scale-125 object-contain sm:h-16 sm:w-16"
+                    aria-hidden="true"
                 />
                 <span class="block min-w-0 text-lg truncate font-semibold tracking-[-0.03em] sm:text-xl">
 					<span

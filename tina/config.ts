@@ -291,7 +291,7 @@ export default defineConfig({
 	clientId,
 	token,
 	build: { outputFolder: 'admin', publicFolder: 'public' },
-	media: { tina: { mediaRoot: 'images/uploads', publicFolder: 'src/assets' } },
+	media: { tina: { mediaRoot: 'images/uploads', publicFolder: 'public' } },
 	schema: {
 		collections: [
 			{

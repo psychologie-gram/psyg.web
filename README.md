@@ -67,11 +67,11 @@ Alle sichtbaren Texte und Beschriftungen werden ueber diese Dokumente geladen.
 Globale UI-Texte liegen unter `site.ui`; Seitenbilder liegen in den
 entsprechenden `page.blocks[]`-Vorlagen, zum Beispiel `hero.image` oder
 `services.cards[].image`. Alle in Tina bearbeitbaren Medien liegen im
-Medienordner `src/assets/images/uploads` und werden in den JSON-Dateien mit
-einem Pfad wie `/images/uploads/datei.svg` referenziert. TinaCloud schreibt
-neue Uploads in denselben Git-Ordner. Astro importiert diese Dateien beim Build
-und liefert sie als statische Workers-Assets aus; eine Laufzeit-Dateisystemroute
-ist nicht erforderlich. Nicht-redaktionelle Website-Dateien wie Favicon und
+Medienordner `public/images/uploads` und werden in den JSON-Dateien mit einem
+Pfad wie `/images/uploads/datei.svg` referenziert. TinaCloud schreibt neue
+Uploads in denselben Git-Ordner. Astro liefert diese Dateien beim Build direkt
+als statische Workers-Assets aus; eine Laufzeit-Dateisystemroute ist nicht
+erforderlich. Nicht-redaktionelle Website-Dateien wie Favicon und
 Open-Graph-Grafik bleiben ausserhalb dieses Ordners.
 Der Textinhalt-Block verwendet ein Tina-Rich-Text-Feld. Dadurch koennen
 Formatierungen wie Fett, Kursiv, Hervorhebung und Links direkt im visuellen
@@ -269,7 +269,7 @@ Den Worker im Dashboard mit `www.psychologie-gram.at` und dem bevorzugten
 kanonischen Host verbinden. DNS, Custom Domain, TLS und Redirect vom jeweils
 anderen Host werden dort konfiguriert; die kanonische URL bleibt
 `https://www.psychologie-gram.at`. Cloudflare Assets bedienen HTML, Admin,
-JavaScript, CSS und alle importierten Medien. Die
+JavaScript, CSS und alle Medien aus `public/`. Die
 `/tina-island/*`-Anfragen werden dagegen im Worker ausgefuehrt und greifen fuer
 die Live-Vorschau auf TinaCloud zu.
 

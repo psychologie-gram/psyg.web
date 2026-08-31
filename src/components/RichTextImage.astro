@@ -1,6 +1,4 @@
 ---
-import OptimizedImage from './OptimizedImage.astro';
-
 interface Props {
 	url?: string | null;
 	alt?: string | null;
@@ -9,4 +7,4 @@ interface Props {
 const { url, alt } = Astro.props;
 ---
 
-<OptimizedImage src={url} alt={alt} loading="lazy" />
+{url && <img src={url} alt={alt ?? ''} loading="lazy" decoding="async" />}

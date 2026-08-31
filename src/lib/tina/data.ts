@@ -1,6 +1,8 @@
 import { requestWithMetadata } from '@tinacms/astro/data';
+import { createClient } from 'tinacms/dist/client';
 
 import client from '../../../tina/__generated__/client';
+import { queries } from '../../../tina/__generated__/types';
 import { allPages as staticAllPages, type PageData, type SiteSettings } from '../site-data';
 import { isTinaRichTextContent } from '../rich-text';
 
@@ -16,6 +18,15 @@ const pageRouteByFilename: Record<string, string> = {
 
 type MaybeArray<T> = Array<T | null> | null | undefined;
 type RawRecord = Record<string, unknown>;
+type TinaQueryClient = typeof client;
+
+// Static page rendering runs inside Cloudflare's prerenderer, where the
+// TINA_LOCAL_URL environment variable from `tinacms build --content=local`
+// is not available.
+const localClient: TinaQueryClient = createClient({
+	url: 'http://localhost:4001/graphql',
+	queries
+});
 
 export type IndexedItem<T> = { value: T; index: number };
 
@@ -80,12 +91,12 @@ function normalizeLink(link: unknown) {
 	return { label, href };
 }
 
-export const getSiteDocument = () =>
-	requestWithMetadata(client.queries.site({ relativePath: 'site.json' }));
-export const getPageDocument = (filename: string) =>
-	requestWithMetadata(client.queries.page({ relativePath: filename }), { priority: 'primary' });
-export const getPageDocuments = () =>
-	requestWithMetadata(client.queries.pageConnection({ first: 100 }));
+export const getSiteDocument = (queryClient: TinaQueryClient = client) =>
+	requestWithMetadata(queryClient.queries.site({ relativePath: 'site.json' }));
+export const getPageDocument = (filename: string, queryClient: TinaQueryClient = client) =>
+	requestWithMetadata(queryClient.queries.page({ relativePath: filename }), { priority: 'primary' });
+export const getPageDocuments = (queryClient: TinaQueryClient = client) =>
+	requestWithMetadata(queryClient.queries.pageConnection({ first: 100 }));
 
 export type TinaSiteDocument = NonNullable<Awaited<ReturnType<typeof getSiteDocument>>['data']['site']>;
 export type TinaPageBlockDocument = RawRecord;
@@ -310,11 +321,11 @@ function mergePreviewPage(filename: string, page: PageData, pageDocuments: TinaP
 	return [...nextPages, page].sort((left, right) => left.order - right.order);
 }
 
-export async function loadTinaPage(filename: string) {
+export async function loadTinaPage(filename: string, queryClient: TinaQueryClient = client) {
 	const [siteResult, pageResult, pageDocumentsResult] = await Promise.all([
-		getSiteDocument(),
-		getPageDocument(filename),
-		getPageDocuments()
+		getSiteDocument(queryClient),
+		getPageDocument(filename, queryClient),
+		getPageDocuments(queryClient)
 	]);
 	const siteDocument = siteResult.data?.site;
 	const pageDocument = pageResult.data?.page as TinaPageDocument | null | undefined;
@@ -337,3 +348,5 @@ export async function loadTinaPage(filename: string) {
 		pageDocuments
 	};
 }
+
+export const loadLocalTinaPage = (filename: string) => loadTinaPage(filename, localClient);

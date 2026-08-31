@@ -3,11 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import TinaIsland from '@tinacms/astro/TinaIsland.astro';
 
 import EditablePageContent from '../components/tina/EditablePageContent.astro';
-import { loadTinaPage } from '../lib/tina/data';
+import { loadLocalTinaPage } from '../lib/tina/data';
 import { islands } from '../lib/tina/islands';
 
 const { page, site, allPages, navigationPages, pageDocument, siteDocument, pageDocuments } =
-	await loadTinaPage('impressum-datenschutz.json');
+	await loadLocalTinaPage('impressum-datenschutz.json');
 ---
 
 <BaseLayout

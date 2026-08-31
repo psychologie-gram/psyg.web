@@ -1,10 +1,8 @@
 ---
-import { getImage } from 'astro:assets';
 import { tinaField } from '@tinacms/astro/tina-field';
 
 import '../styles/global.css';
 
-import { resolveMediaAsset } from '../lib/media';
 import type { TinaPageListDocument, TinaSiteDocument } from '../lib/tina/data';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -25,34 +23,15 @@ interface Props {
 const { title, description, currentPath, pages, allPages = pages, site, siteDocument, pageSources } = Astro.props;
 const pageTitle = title === site.name ? title : `${title} | ${site.name}`;
 const canonical = new URL(currentPath, site.siteUrl).toString();
-const logoAsset = await resolveMediaAsset('/images/uploads/ag_logo_1536x1536.png');
-const faviconAsset = await resolveMediaAsset('/images/uploads/ag_logo_128x128.png');
-const portraitAsset = await resolveMediaAsset('/images/uploads/alexandra-gram-portrait.jpg');
+const logoPath = '/images/uploads/ag_logo_1536x1536.png';
+const faviconPath = '/images/uploads/ag_logo_128x128.png';
+const portraitPath = '/images/uploads/alexandra-gram-portrait.jpg';
 
-if (!logoAsset || logoAsset.kind !== 'optimized') {
-	throw new Error('The header logo asset could not be resolved.');
-}
-if (!faviconAsset || faviconAsset.kind !== 'optimized') {
-	throw new Error('The favicon asset could not be resolved.');
-}
-if (!portraitAsset || portraitAsset.kind !== 'optimized') {
-	throw new Error('The structured-data portrait asset could not be resolved.');
-}
-
-const logoPreload = await getImage({
-	src: logoAsset.source,
-	width: 64,
-	height: 64,
-	widths: [48, 64, 96, 128],
-	sizes: '(min-width: 640px) 4rem, 3rem',
-	format: 'avif'
-});
-const portraitImage = await getImage({ src: portraitAsset.source, width: 550, format: 'webp' });
 const structuredData = buildStructuredData(site, {
 	canonicalUrl: canonical,
 	pageTitle,
 	description,
-	imagePath: portraitImage.src
+	imagePath: portraitPath
 });
 ---
 
@@ -126,12 +105,10 @@ const structuredData = buildStructuredData(site, {
 		<link
 			rel="preload"
 			as="image"
-			href={logoPreload.src}
-			imagesrcset={logoPreload.srcSet.attribute}
-			imagesizes="(min-width: 640px) 4rem, 3rem"
-			type="image/avif"
+			href={logoPath}
+			type="image/png"
 		/>
-		<link rel="icon" type="image/png" sizes="128x128" href={faviconAsset.source.src} />
+		<link rel="icon" type="image/png" sizes="128x128" href={faviconPath} />
 		<link rel="canonical" href={canonical} />
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="de_AT" />

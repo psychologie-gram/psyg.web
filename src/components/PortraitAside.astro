@@ -3,9 +3,7 @@ import { tinaField } from '@tinacms/astro/tina-field';
 
 import type { SiteSettings } from '../lib/site-data';
 import type { TinaPageBlockDocument } from '../lib/tina/data';
-import { resolveMediaPath } from '../lib/media';
 import Card from './ui/Card.astro';
-import OptimizedImage from './OptimizedImage.astro';
 
 interface Props {
 	site: SiteSettings;
@@ -30,7 +28,7 @@ const {
 	presentation = 'framed',
 	borderless = false
 } = Astro.props;
-const imageSrc = resolveMediaPath(src) ?? '/images/uploads/alexandra-gram-portrait.jpg';
+const imageSrc = src || '/images/uploads/alexandra-gram-portrait.jpg';
 const imageAltValue = source?.imageAlt;
 const imageAlt = (typeof imageAltValue === 'string' ? imageAltValue.trim() : '') || `Portrait von ${site.owner}`;
 const naturalPresentation = presentation === 'natural';
@@ -53,17 +51,15 @@ const borderlessPresentation = borderless;
 	]}
 >
 	<figure class:list={[borderlessPresentation ? 'overflow-hidden rounded-[1rem]' : naturalPresentation ? 'flex justify-center' : 'portrait-stage']} data-tina-field={tinaField(source, 'image')}>
-		<OptimizedImage
+		<img
 			src={imageSrc}
 			alt={imageAlt}
 			width={width}
 			height={height}
-			widths={[Math.round(width * 0.6), width]}
-			sizes="(min-width: 1024px) 30rem, 100vw"
 			loading="eager"
-			decoding="async"
+			decoding="sync"
 			class:list={[imageClass, naturalPresentation && 'rounded-[0.8rem]']}
-			tinaField={tinaField(source, 'imageAlt')}
+			data-tina-field={tinaField(source, 'imageAlt')}
 		/>
 	</figure>
 </Card>

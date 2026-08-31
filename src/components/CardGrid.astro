@@ -3,12 +3,10 @@ import { tinaField } from '@tinacms/astro/tina-field';
 
 import type { ServicesContent } from '../lib/site-data';
 import { resolveCmsHref } from '../lib/links';
-import { resolveMediaPath } from '../lib/media';
 import { indexedRecordList, indexedStringList, type TinaPageBlockDocument } from '../lib/tina/data';
 import Card from './ui/Card.astro';
 import Container from './ui/Container.astro';
 import Button from './ui/Button.astro';
-import OptimizedImage from './OptimizedImage.astro';
 import Section from './ui/Section.astro';
 
 interface Props {
@@ -30,23 +28,20 @@ const cardSources = indexedRecordList(source?.cards);
 				const itemSources = indexedStringList(sourceCard?.items);
 				const href = resolveCmsHref(card.href);
 				const isExternal = href ? /^https?:/i.test(href) : false;
-				const imageSrc = resolveMediaPath(card.image);
+				const imageSrc = card.image?.trim();
 				return (
 					<Card tone="default" class="group flex h-full flex-col overflow-hidden p-0 transition-transform duration-200 hover:-translate-y-0.5" tinaField={tinaField(sourceCard)}>
 						{imageSrc && (
 							<figure class="flex h-36 w-full items-center justify-center border-b border-[var(--border-color)] bg-[var(--bg-soft)] px-6 py-4 sm:h-44 sm:px-8" data-tina-field={tinaField(sourceCard, 'image')}>
-								<OptimizedImage
+								<img
 									src={imageSrc}
 									alt={card.imageAlt}
 									width={242}
 									height={242}
-									widths={[160, 242]}
-									sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
 									loading="lazy"
 									decoding="async"
-									fit="contain"
 									class="h-full w-full object-contain"
-									tinaField={tinaField(sourceCard, 'imageAlt')}
+									data-tina-field={tinaField(sourceCard, 'imageAlt')}
 								/>
 							</figure>
 						)}
