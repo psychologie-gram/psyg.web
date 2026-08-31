@@ -6,14 +6,13 @@
   "description": "Psychologische Therapie, Beratung, Supervision und Fachvorträge – abgestimmt auf Ihre aktuelle Lebenssituation und Ihre individuellen Bedürfnisse.",
   "blocks": [
     {
-      "_template": "hero",
       "visible": true,
       "variant": "standard",
       "title": "Mein Angebot",
-      "intro": ""
+      "intro": "",
+      "_template": "hero"
     },
     {
-      "_template": "services",
       "visible": true,
       "variant": "grid",
       "cards": [
@@ -21,7 +20,7 @@
           "title": "Psychologische Therapie",
           "image": "/images/uploads/angebot-psychologische-therapie.svg",
           "imageAlt": "Illustration eines Wegweisers als Symbol für verschiedene Wege",
-          "description": "professionelle Unterstützung bei der Bewältigung psychischer, sozialer und körperlicher Schwierigkeiten"
+          "description": "professionelle Unterstützung bei der Bewältigung psychischer, sozialer und körperlicher Schwierigkeiten | Hilfe, Gedanken, Gefühle und Verhaltensmuster besser zu verstehen und neue Wege im Umgang damit zu entwickeln"
         },
         {
           "title": "Beratung",
@@ -61,7 +60,8 @@
           "hrefLabel": "www.testified.at",
           "href": "https://www.testified.at"
         }
-      ]
+      ],
+      "_template": "services"
     }
   ]
 }
