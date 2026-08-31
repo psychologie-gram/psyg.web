@@ -6,14 +6,13 @@
   "description": "So läuft die Kontaktaufnahme, das Erstgespräch und die weitere therapeutische Begleitung ab – inklusive transparenter Kostenübersicht.",
   "blocks": [
     {
-      "_template": "hero",
       "visible": true,
       "variant": "standard",
       "title": "Ablauf & Kosten",
-      "intro": "Je nach Ihrem individuellem Bedarf und Befinden kann die Dauer der Therapie und die Häufigkeit der einzelnen Termine variieren. Wichtig ist, dass Sie sich selbst die Zeit geben, die Sie brauchen."
+      "intro": "Je nach Ihrem individuellem Bedarf und Befinden kann die Dauer der Therapie und die Häufigkeit der einzelnen Termine variieren. Wichtig ist, dass Sie sich selbst die Zeit geben, die Sie brauchen.",
+      "_template": "hero"
     },
     {
-      "_template": "pricing",
       "visible": true,
       "title": "",
       "info": "Seit dem 01.01.2024 ist die Klinisch-psychologische Therapie / Behandlung eine Kassenleistung. Ein Teil der Kosten kann also durch Ihre Krankenkassen rückerstattet werden. Weitere Infos dazu gerne per E-Mail oder im Erstgespräch.",
@@ -33,17 +32,18 @@
         {
           "title": "Psychologische Therapie",
           "price": "115 €",
-          "duration": "Dauer: 50min",
+          "duration": "Dauer: 50min | Regelmäßigkeit & Gesamtanzahl an Terminen: je nach Ihren Kapazitäten, Wünschen & Bedürfnissen - nach individueller Vereinbarung",
           "description": "Therapie findet im Einzelsetting statt. Wir legen gemeinsam Ziele fest, welche Sie mithilfe meiner Unterstützung erreichen können. Dabei setzen wir gemeinsam mittels Gesprächen, Übungen und Trainings positive Veränderungen in Gang.",
-          "note": "Häufigkeit & Länge der Therapie: je nach Ihren Wünschen und Bedürfnissen"
+          "note": ""
         },
         {
           "title": "Klinisch-psychologische Beratung",
           "price": "115 €",
-          "duration": "Dauer: 50min",
+          "duration": "Dauer: 50min | Häufigkeit & Anzahl an Einheiten: Einzelne Einheiten oder mehrere Termine - flexibel und individuell nach Bedarf buchbar",
           "description": "Beratungseinheiten können im Einzel-, Paar- oder Gruppensetting stattfinden. Sie kommen mit einem konkreten Anliegen oder spezifischen Fragen und ich unterstütze Sie bei der Bewältigung. Je nach Bedarf kann es bei einer einzelnen Einheit bleiben oder wir vereinbaren weitere Gespräche."
         }
-      ]
+      ],
+      "_template": "pricing"
     }
   ]
 }
