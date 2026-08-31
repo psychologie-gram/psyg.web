@@ -183,11 +183,21 @@ npm run build:production
 npm run deploy
 ```
 
-`build:production` fuehrt `tinacms build` ohne `--local` oder
-`--skip-cloud-checks` aus und startet danach `astro build`. Dadurch wird der
-generierte Admin zusammen mit der Website gebaut und der Astro-Server nur fuer
-`/tina-island/*` in den Worker aufgenommen. Fuer einen lokalen Worker-Test
-zuerst `npm run build` und danach `npm run preview:worker` ausfuehren.
+`build:production` fuehrt `tinacms build --content=local` aus und startet
+danach `astro build`. Dadurch liest der statische Produktions-Build die
+committeten JSON-Dateien und Medien aus dem lokalen Repository, waehrend der
+generierte Produktions-Client fuer den Editor weiterhin auf TinaCloud zeigt.
+Der generierte Admin wird zusammen mit der Website gebaut und der
+Astro-Server wird nur fuer `/tina-island/*` in den Worker aufgenommen. Fuer
+einen lokalen Worker-Test zuerst `npm run build` und danach
+`npm run preview:worker` ausfuehren.
+
+`--content=local` ist nicht dasselbe wie `--local`: Ersteres verwendet lokale
+Inhalte und Medien, erzeugt aber den TinaCloud-Client fuer die Laufzeit des
+Editors. `--local` erzeugt dagegen einen lokalen Tina-Client und ist fuer den
+Produktions-Deploy nicht vorgesehen. Aenderungen, die in TinaCloud gespeichert
+werden, erscheinen auf den oeffentlichen Cloudflare-Seiten nach dem bestehenden
+GitHub- und Produktions-Build/Deploy.
 `npm run preview` verwendet mit dem Cloudflare-Adapter ebenfalls die
 Workerd/Wrangler-Vorschau und ist kein Node-Produktionsserver.
 

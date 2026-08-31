@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "tinacms dev -c \"astro dev\"",
     "build": "tinacms build --local --skip-cloud-checks -c \"astro build\"",
-    "build:production": "tinacms build -c \"astro build\"",
+    "build:production": "tinacms build --content=local -c \"astro build\"",
     "migrate:blocks": "node scripts/migrate-page-blocks.mjs",
     "preview": "astro preview",
     "preview:worker": "wrangler dev",

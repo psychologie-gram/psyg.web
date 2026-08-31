@@ -34,7 +34,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Astro site with TinaCloud
+      - name: Build Astro site from local Tina content
         env:
           TINA_CLIENT_ID: ${{ vars.TINA_CLIENT_ID }}
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
