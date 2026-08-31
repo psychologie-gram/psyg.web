@@ -33,14 +33,24 @@
           "organization": "Institut TESTIFIED: Psychologische Diagnostik | Beratung | Therapie"
         },
         {
-          "period": "2022-2023",
-          "title": "Postgraduelle Fachausbildung zur Klinischen Psychologin",
-          "organization": "Wiener Akademie für Klinische Psychologie"
+          "period": "Klinische Praxis",
+          "title": "Klinik Ottakring",
+          "details": [
+            "Abteilung für Kinder- und Jugendheilkunde: Neonatologie & Entwicklungsambulanz, Psychosomatik",
+            "Neurologische Abteilung",
+            "Abteilungen für innere Medizin (Nephrologie, Kardiologie, Pulmologie)",
+            "Abteilung für Onkologie & Hämatologie mit Palliativstation"
+          ]
         },
         {
           "period": "2022",
           "title": "Klinische Psychologin i.A.",
           "organization": "Institut TESTIFIED"
+        },
+        {
+          "period": "2022-2023",
+          "title": "Postgraduelle Fachausbildung zur Klinischen Psychologin",
+          "organization": "Wiener Akademie für Klinische Psychologie"
         },
         {
           "period": "2020-2022",
@@ -69,14 +79,9 @@
           "organization": "Universität Wien"
         },
         {
-          "period": "Klinische Praxis",
-          "title": "Klinik Ottakring",
-          "details": [
-            "Abteilung für Kinder- und Jugendheilkunde: Neonatologie & Entwicklungsambulanz, Psychosomatik",
-            "Neurologische Abteilung",
-            "Abteilungen für innere Medizin (Nephrologie, Kardiologie, Pulmologie)",
-            "Abteilung für Onkologie & Hämatologie mit Palliativstation"
-          ]
+          "period": "2016-2021",
+          "title": "Diverse Praktika im psychosozialen Bereich",
+          "organization": "z.B. Österreichische Autistenhilfe, \"e.motion\" Equotherapie, Akutpsychiatrische Station UK Tull, Pädiatrische Neuroonkologie AKH Wien,..."
         }
       ],
       "_template": "timeline"
