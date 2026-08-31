@@ -23,7 +23,7 @@
             "children": [
               {
                 "type": "text",
-                "text": "Gerne können Sie mich telefonisch oder per Mail erreichen, um einen Termin zu vereinbaren oder weitere Informationen zu erhalten. Ich werde mich verlässlich bei Ihnen melden!  \n\n"
+                "text": "Gerne können Sie mich telefonisch oder per Mail erreichen, um einen Termin zu vereinbaren oder weitere Informationen zu erhalten. Ich werde mich verlässlich bei Ihnen melden!  \n"
               },
               {
                 "type": "text",
@@ -86,7 +86,7 @@
             "children": [
               {
                 "type": "text",
-                "text": "(1. Stock, leider nicht barrierefrei zugänglich)"
+                "text": "(1. Stock, leider nicht barrierefrei zugänglich)\n\n"
               }
             ],
             "id": "KgaHzIyvB4"
