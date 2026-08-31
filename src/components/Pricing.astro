@@ -2,7 +2,7 @@
 import { tinaField } from "@tinacms/astro/tina-field";
 
 import type { PricingBlock } from "../lib/site-data";
-import { indexedRecordList, type TinaPageBlockDocument } from "../lib/tina/data";
+import { indexedRecordList, indexedStringList, type TinaPageBlockDocument } from "../lib/tina/data";
 import Card from "./ui/Card.astro";
 import Container from "./ui/Container.astro";
 import Section from "./ui/Section.astro";
@@ -29,6 +29,7 @@ const entrySources = indexedRecordList(source?.entries);
         <div class="grid gap-4 md:grid-cols-2" data-tina-field={tinaField(source)}>
           {block.entries.map((entry, index) => {
             const sourceEntry = entrySources[index]?.value;
+            const durationSources = indexedStringList(sourceEntry?.duration);
             return (
                     <Card
                             class="group flex h-full flex-col overflow-hidden border-[var(--border-color)] bg-[var(--bg)] p-0 shadow-[var(--shadow-card)] transition-transform duration-200 hover:-translate-y-0.5"
@@ -38,14 +39,18 @@ const entrySources = indexedRecordList(source?.entries);
                             <div class="min-w-0 ">
                                 <h3 class="text-[1.25rem] leading-7 text-[var(--text)] sm:text-[1.4rem]"
                                     data-tina-field={tinaField(sourceEntry, "title")}>{entry.title}</h3>
-                                <div class="mt-1">
-                                  {entry.duration && (
-                                          <p class="inline-flex rounded-full border border-[var(--border-color)] bg-[var(--bg-soft)] px-2.5 py-0.5 text-xs leading-5 text-[var(--subtle)]"
-                                             data-tina-field={tinaField(sourceEntry, "duration")}>
-                                            {entry.duration}
-                                          </p>
-                                  )}
-                                </div>
+                                {entry.duration.some((duration) => duration.length > 0) && (
+                                        <div class="mt-2 flex flex-wrap gap-2">
+                                          {entry.duration.map((duration, durationIndex) => (
+                                            duration && (
+                                              <span class="inline-flex rounded-full border border-[var(--border-color)] bg-[var(--bg-soft)] px-2.5 py-0.5 text-xs leading-5 text-[var(--subtle)]"
+                                                    data-tina-field={tinaField(sourceEntry, "duration", durationSources[durationIndex]?.index)}>
+                                                {duration}
+                                              </span>
+                                            )
+                                          ))}
+                                        </div>
+                                )}
                             </div>
                           {entry.price && (
                                   <p class="shrink-0 rounded-full bg-[var(--accent)] px-3 py-1.5 text-sm font-semibold leading-6 text-[var(--color-primary-content)] sm:px-4 sm:text-base"

@@ -98,7 +98,7 @@ const timelineSchema = z.object({
 const pricingEntrySchema = z.object({
 	title: z.string(),
 	price: z.string().optional(),
-	duration: z.string().optional(),
+	duration: z.array(z.string()).default([]),
 	description: z.string(),
 	note: z.string().optional()
 });

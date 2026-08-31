@@ -1,5 +1,7 @@
 import { defineConfig, type Template, type TinaField } from 'tinacms';
 
+type RichTextOverrides = NonNullable<Extract<TinaField, { type: 'rich-text' }>['overrides']>;
+
 const branch =
 	process.env.TINA_BRANCH ??
 	process.env.GITHUB_BRANCH ??
@@ -30,6 +32,10 @@ const visibleField: TinaField = {
 	label: 'Anzeigen',
 	type: 'boolean',
 	ui: { defaultValue: true }
+};
+const richTextOverrides: RichTextOverrides = {
+	toolbar: ['heading', 'bold', 'italic', 'strikethrough', 'highlight', 'link', 'ul', 'ol', 'quote', 'raw'],
+	headingLevels: ['h2', 'h3']
 };
 
 const siteUiFields: TinaField[] = [
@@ -67,7 +73,7 @@ const timelineEntryFields: TinaField[] = [
 const pricingEntryFields: TinaField[] = [
 	{ name: 'title', label: 'Titel', type: 'string', required: true },
 	{ name: 'price', label: 'Preis', type: 'string' },
-	{ name: 'duration', label: 'Dauer', type: 'string' },
+	{ name: 'duration', label: 'Infos', type: 'string', list: true },
 	{ name: 'description', label: 'Beschreibung', type: 'string', required: true, ui: { component: 'textarea' } },
 	{ name: 'note', label: 'Hinweis', type: 'string' }
 ];
@@ -152,9 +158,7 @@ const blockTemplates: Template[] = [
 				label: 'Text',
 				type: 'rich-text',
 				parser: { type: 'slatejson' },
-				overrides: {
-					toolbar: ['bold', 'italic', 'highlight', 'link', 'raw']
-				}
+				overrides: richTextOverrides
 			},
 			{ name: 'links', label: 'Verweise', type: 'object', list: true, fields: itemFields }
 		]
@@ -228,9 +232,7 @@ const blockTemplates: Template[] = [
 				label: 'Kontakttext',
 				type: 'rich-text',
 				parser: { type: 'slatejson' },
-				overrides: {
-					toolbar: ['bold', 'italic', 'highlight', 'link', 'raw']
-				}
+				overrides: richTextOverrides
 			},
 			{ name: 'image', label: 'Praxisbild', type: 'image' },
 			{ name: 'imageAlt', label: 'Bildbeschreibung', type: 'string' },

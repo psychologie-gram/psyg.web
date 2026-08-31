@@ -389,13 +389,33 @@
 		overflow-wrap: anywhere;
 	}
 
+	.prose-flow p,
+	.prose-flow li,
+	.prose-flow h2,
+	.prose-flow h3,
+	.prose-flow blockquote {
+		white-space: pre-line;
+	}
+
 	.prose-flow ul {
 		padding-left: 1.2rem;
 		list-style: disc;
 	}
 
+	.prose-flow ol {
+		padding-left: 1.4rem;
+		list-style: decimal;
+	}
+
 	.prose-flow li::marker {
 		color: var(--accent);
+	}
+
+	.prose-flow blockquote {
+		border-left: 3px solid var(--accent);
+		padding-left: 1rem;
+		color: var(--text);
+		font-style: italic;
 	}
 
 	.prose-flow strong {

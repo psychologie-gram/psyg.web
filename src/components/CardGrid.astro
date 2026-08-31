@@ -32,7 +32,7 @@ const cardSources = indexedRecordList(source?.cards);
 				const isExternal = href ? /^https?:/i.test(href) : false;
 				const imageSrc = resolveMediaPath(card.image);
 				return (
-					<Card tone="default" class="flex h-full flex-col overflow-hidden p-0" tinaField={tinaField(sourceCard)}>
+					<Card tone="default" class="group flex h-full flex-col overflow-hidden p-0 transition-transform duration-200 hover:-translate-y-0.5" tinaField={tinaField(sourceCard)}>
 						{imageSrc && (
 							<figure class="flex h-36 w-full items-center justify-center border-b border-[var(--border-color)] bg-[var(--bg-soft)] px-6 py-4 sm:h-44 sm:px-8" data-tina-field={tinaField(sourceCard, 'image')}>
 								<OptimizedImage

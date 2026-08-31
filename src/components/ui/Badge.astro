@@ -1,11 +1,12 @@
 ---
 interface Props {
 	tone?: 'primary' | 'neutral' | 'outline';
+	tinaField?: string;
 }
 
-const { tone = 'primary' } = Astro.props;
+const { tone = 'primary', tinaField: field } = Astro.props;
 ---
 
-<span class:list={['badge', tone === 'primary' && 'badge-primary', tone === 'neutral' && 'badge-neutral', tone === 'outline' && 'badge-outline']}>
+<span class:list={['badge', tone === 'primary' && 'badge-primary', tone === 'neutral' && 'badge-neutral', tone === 'outline' && 'badge-outline']} data-tina-field={field}>
 	<slot />
 </span>

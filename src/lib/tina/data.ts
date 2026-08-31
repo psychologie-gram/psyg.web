@@ -51,6 +51,10 @@ function normalizeStringArray(items: unknown): string[] {
 	return indexedStringList(items).map(({ value }) => value);
 }
 
+function normalizePricingDurations(value: unknown): string[] {
+	return typeof value === 'string' ? (value ? [value] : []) : normalizeStringArray(value);
+}
+
 function optionalString(value: unknown): string | undefined {
 	return typeof value === 'string' ? value : undefined;
 }
@@ -215,7 +219,7 @@ function normalizeBlock(block: TinaPageBlockDocument): PageData['blocks'][number
 			entries: compactRecords(value.entries).map((entry) => ({
 				title: stringValue(entry.title),
 				price: optionalString(entry.price),
-				duration: optionalString(entry.duration),
+				duration: normalizePricingDurations(entry.duration),
 				description: stringValue(entry.description),
 				note: optionalString(entry.note)
 			}))

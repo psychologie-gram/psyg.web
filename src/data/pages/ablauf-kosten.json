@@ -20,26 +20,32 @@
         {
           "title": "Kontaktaufnahme & Terminvereinbarung",
           "price": "kostenlos",
-          "duration": "",
+          "duration": [],
           "description": "Schreiben Sie mir eine E-Mail oder rufen Sie mich an und hinterlassen mir eine Nachricht, am besten mit einer kurzen Info über Ihr Anliegen. Ich melde mich verlässlich per E-Mail oder telefonisch bei Ihnen, um einen Termin für ein Erstgespräch zu vereinbaren."
         },
         {
           "title": "Erstgespräch",
           "price": "95 €",
-          "duration": "Dauer: 50min",
+          "duration": [
+            "Dauer: 50min"
+          ],
           "description": "Während des Erstgespräch lernen wir uns kennen und Sie können sich einen persönlichen Eindruck von mir und meiner Arbeitsweise machen. Wir besprechen Ihr Anliegen, Ihre Wünsche und Erwartungen. Auch die Rahmenbedingungen des psychologischen Arbeitens werden geklärt und die weitere Therapie wird geplant."
         },
         {
           "title": "Psychologische Therapie",
           "price": "115 €",
-          "duration": "Dauer: 50min | Regelmäßigkeit & Gesamtanzahl an Terminen: je nach Ihren Kapazitäten, Wünschen & Bedürfnissen - nach individueller Vereinbarung",
+          "duration": [
+            "Dauer: 50min | Regelmäßigkeit & Gesamtanzahl an Terminen: je nach Ihren Kapazitäten, Wünschen & Bedürfnissen - nach individueller Vereinbarung"
+          ],
           "description": "Therapie findet im Einzelsetting statt. Wir legen gemeinsam Ziele fest, welche Sie mithilfe meiner Unterstützung erreichen können. Dabei setzen wir gemeinsam mittels verschiedener, wissenschaftlich fundierter und für Sie passender Interventionen positive Veränderungen in Gang.",
           "note": ""
         },
         {
           "title": "Klinisch-psychologische Beratung",
           "price": "115 €",
-          "duration": "Dauer: 50min | Häufigkeit & Anzahl an Einheiten: Einzelne Einheiten oder mehrere Termine - flexibel und individuell nach Bedarf buchbar",
+          "duration": [
+            "Dauer: 50min "
+          ],
           "description": "Beratungseinheiten können im Einzel-, Paar- oder Gruppensetting stattfinden. Sie kommen mit einem konkreten Anliegen oder spezifischen Fragen und ich unterstütze Sie bei der Bewältigung. Je nach Bedarf kann es bei einer einzelnen Einheit bleiben oder wir vereinbaren weitere Gespräche."
         }
       ],
